@@ -63,9 +63,28 @@ class StationViewer
             # Save the system data to ourselves
             @system = data
             @system.base_url = url.slice(0, url.lastIndexOf("/") + 1)
+            # Populate the picker
+            picker = jQuery(".picker .stations").html("")
+            for code, details of @system.stations
+                li = jQuery("<li><h5>" + details.title + "</h5><p></p></li>")
+                for line in details.lines
+                    line_color = @system.lines[line].color
+                    line_title = @system.lines[line].title
+                    li.find("p").append("<span style='background: #" + line_color + "'>" + line_title + "</span>")
+                li.click(() => (@loadStation(code); @hidePicker()))
+                picker.append(li)
+            # Possibly run a callback
             if callback?
                 callback()
         )
+
+    # Shows the "pick a station" dialog
+    showPicker: ->
+        jQuery(".picker").show()
+
+    # Hides the picker dialog
+    hidePicker: ->
+        jQuery(".picker").hide()
 
     # Loads a station from its URL
     loadStation: (code, callback) ->
@@ -89,8 +108,9 @@ class StationViewer
                 line_color = @system.lines[line].color
                 line_title = @system.lines[line].title
                 jQuery(".header h2").append("<span style='background: #" + line_color + "'>" + line_title + "</span>")
-            jQuery(".info").html("<dl></dl>")
+            jQuery(".copyright .value").text(data.info.copyright)
             # Attributes
+            jQuery(".info").html("<dl></dl>")
             for name, title of @system.infos
                 value = data.info[name]
                 if value?

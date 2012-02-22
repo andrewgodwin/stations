@@ -72,10 +72,37 @@ Station viewer
     StationViewer.prototype.loadSystem = function(url, callback) {
       var _this = this;
       return jQuery.getJSON(url, "", function(data) {
+        var code, details, li, line, line_color, line_title, picker, _i, _len, _ref, _ref2;
         _this.system = data;
         _this.system.base_url = url.slice(0, url.lastIndexOf("/") + 1);
+        picker = jQuery(".picker .stations").html("");
+        _ref = _this.system.stations;
+        for (code in _ref) {
+          details = _ref[code];
+          li = jQuery("<li><h5>" + details.title + "</h5><p></p></li>");
+          _ref2 = details.lines;
+          for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+            line = _ref2[_i];
+            line_color = _this.system.lines[line].color;
+            line_title = _this.system.lines[line].title;
+            li.find("p").append("<span style='background: #" + line_color + "'>" + line_title + "</span>");
+          }
+          li.click(function() {
+            _this.loadStation(code);
+            return _this.hidePicker();
+          });
+          picker.append(li);
+        }
         if (callback != null) return callback();
       });
+    };
+
+    StationViewer.prototype.showPicker = function() {
+      return jQuery(".picker").show();
+    };
+
+    StationViewer.prototype.hidePicker = function() {
+      return jQuery(".picker").hide();
     };
 
     StationViewer.prototype.loadStation = function(code, callback) {
@@ -99,6 +126,7 @@ Station viewer
           line_title = _this.system.lines[line].title;
           jQuery(".header h2").append("<span style='background: #" + line_color + "'>" + line_title + "</span>");
         }
+        jQuery(".copyright .value").text(data.info.copyright);
         jQuery(".info").html("<dl></dl>");
         _ref2 = _this.system.infos;
         for (name in _ref2) {

@@ -3,10 +3,81 @@ body {
     font-family: Trebuchet, "Trebuchet MS", sans-serif;
 }
 
+.picker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 10;
+}
+    .picker h1 {
+        margin: 30px 0 15px 0;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .picker h2 {
+        margin: 15px 0 15px 0;
+        text-align: center;
+        font-size: 20px;
+    }
+    .picker .stations {
+        margin-left: auto;
+        margin-right: auto;
+        width: 800px;
+    }
+        .picker .stations li {
+            float: left;
+            overflow: hidden;
+            margin: 10px 10px 0 0;
+            width: 170px;
+            height: 40px;
+            border: 1px solid #042547;
+            padding: 10px 10px;
+            border-radius: 3px;
+            background-image: -webkit-linear-gradient(top,#fff,#eaecee);
+            background-image: -moz-linear-gradient(top,#fff,#eaecee);
+            background-image: -o-linear-gradient(top,#fff,#eaecee);
+            background-image: -ms-linear-gradient(top,#fff,#eaecee);
+            background-image: linear-gradient(top,#fff,#eaecee);
+            cursor: pointer;
+        }
+            .picker .stations li h5 {
+                margin: 0 0 5px 0;
+                font-size: 110%;
+            }
+            .picker .stations p span {
+                margin: 0 5px 0 0;
+                padding: 1px 3px;
+                border-radius: 3px;
+                color: #fff;
+                text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+                font-size: 70%;
+                font-weight: bold;
+            }
+
 .header {
     margin: 20px 0 20px 100px;
     position: relative;
 }
+    .header .pick {
+        margin: 5px 100px 0 0;
+        float: right;
+        padding: 7px 12px;
+        border: 1px solid #042547;
+        cursor: pointer;
+        background-image: -webkit-linear-gradient(top,#568abe,#0f4d8c);
+        background-image: -moz-linear-gradient(top,#568abe,#0f4d8c);
+        background-image: -o-linear-gradient(top,#568abe,#0f4d8c);
+        background-image: -ms-linear-gradient(top,#568abe,#0f4d8c);
+        background-image: linear-gradient(top,#568abe,#0f4d8c);
+        border-radius: 3px;
+        color: #fff;
+        text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+        font-size: 90%;
+    }
     .header h1 {
         font-size: 40px;
         font-weight: bold;
@@ -92,3 +163,11 @@ body {
             color: rgba(250, 0, 0, 0.5);
             text-decoration: underline;
         }
+    .copyright {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 70%;
+        color: #aaa;
+        color: rgba(0, 0, 0, 0.5);
+    }

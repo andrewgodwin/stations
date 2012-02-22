@@ -14,6 +14,7 @@
 <body class="">
 
     <div class="header">
+        <a class="pick">Select Station</a>
         <h1></h1>
         <h2></h2>
     </div>
@@ -23,18 +24,28 @@
             No <a href="http://get.webgl.org/">WebGL</a>; rendering may be slow.
         </p>
         <div class="tooltip"></div>
+        <p class="copyright">
+            &copy; <span class="value"></span>
+        </p>
     </div>
 
     <div class="info">
+    </div>
+
+    <div class="picker">
+        <h1>Station Viewer</h1>
+        <ul class="stations">
+        </ul>
     </div>
 
     <script>
         $(function () {
             window.viewer = new StationViewer($('#viewport'));
             viewer.init();
-            // Load a test world
-            viewer.loadSystem("build/london/_system.json", function () {viewer.loadStation("wst")});
-            // Run
+            viewer.loadSystem("build/london/_system.json", function () {
+                viewer.showPicker();
+            });
+            $("a.pick").click(viewer.showPicker)
             viewer.renderLoop();
         });
     </script>
