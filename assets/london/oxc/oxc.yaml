@@ -18,29 +18,26 @@ camera:
     distance: 50
     bearing: 90
     angle: 45
+    elevation: -20
     north: 90
     grid: 70
 
 objects:
     platform.1:
-        title: Platform 1
-        text: Trains to Woolwich (eastbound)
+        title: Platform 1 (Central Line)
+        text: Trains to Epping and Hainault (eastbound)
     platform.2:
-        title: Platform 2
-        text: Trains to Stratford and the City (westbound)
-    lift.1:
-        title: Lift to Platform 1
-    lift.2:
-        title: Lift to Platform 2
-    dlr.westbound-1:
-        title: Westbound track
-        text: Towards Canning Town
-    dlr.eastbound-1:
-        title: Eastbound track
-        text: Towards Pontoon Dock
-    dlr.westbound-2:
-        title: Westbound track
-        text: Towards Canning Town
-    dlr.eastbound-2:
-        title: Eastbound track
-        text: Towards Pontoon Dock
+        title: Platform 2 (Central Line)
+        text: Trains to West Ruislip and Ealing Broadway (westbound)
+    central.westbound-1:
+        title: Westbound Central Line
+        text: Towards Bond Street
+    central.westbound-2:
+        title: Westbound Central Line
+        text: Towards Bond Street
+    central.eastbound-1:
+        title: Eastbound Central Line
+        text: Towards Tottenham Court Road
+    central.eastbound-2:
+        title: Eastbound Central Line
+        text: Towards Tottenham Court Road

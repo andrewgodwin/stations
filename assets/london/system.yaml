@@ -49,6 +49,8 @@ materials:
         color: ccaabb
     dlr:
         color: 009b94
+    central:
+        color: b40f0e
 
 infos:
     zone: Fare Zone
