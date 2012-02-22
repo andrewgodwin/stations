@@ -1,0 +1,50 @@
+title: Seven Sisters
+model: ./svs.js
+lines:
+    - victoria
+
+info:
+    zone: 3
+    opened: 1968
+    ticket_machines: Unknown
+    gated: true
+    copyright: Andrew Godwin, 2012
+    description: Seven Sisters was originally the northern terminus of the Victoria Line when it opened
+        in 1968, and the depot entrance is still located here. Trains terminating here and entering the depot
+        stop in the middle platform, while the outside platforms are for the usual through services.
+
+camera:
+    distance: 60
+    bearing: -90
+    angle: 55
+    elevation: -15
+    north: 90
+    grid: 90
+
+objects:
+    platform.3:
+        title: Platform 3
+        text: Trains to Walthamstow Central
+    platform.4:
+        title: Platform 4
+        text: Terminating trains
+    platform.5:
+        title: Platform 5
+        text: Trains to Brixton
+    victoria.northbound:
+        title: Northbound Victoria Line
+        text: Towards Tottenham Hale
+    victoria.bay:
+        title: Northbound Victoria Line
+        text: Towards Depot
+    victoria.southbound:
+        title: Southbound Victoria Line
+        text: Towards Finsbury Park
+    tickethall.n:
+        title: Northern ticket hall
+    tickethall.s:
+        title: Southern ticket hall
+    escalator.n:
+        title: Escalator
+    escalator.s:
+        title: Escalator

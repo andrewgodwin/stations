@@ -42,15 +42,24 @@ lines:
 
 materials:
     platform:
-        color: aabbcc
+        color: 99aabb
     stairs:
-        color: bbaacc
+        color: 99aabb
+    corridor:
+        color: 99aabb
+    tickethall:
+        color: 99aabb
     lift:
-        color: ccaabb
+        color: 887799
+    escalator:
+        color: 887799
+
     dlr:
         color: 009b94
     central:
         color: b40f0e
+    victoria:
+        color: 008fd1
 
 infos:
     zone: Fare Zone

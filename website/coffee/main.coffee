@@ -183,7 +183,12 @@ class StationViewer
         light = new THREE.DirectionalLight(0xffffff)
         light.position.set(-3, 2, 1)
         light.position.normalize()
-        light.intensity = 2
+        light.intensity = 1.1
+        @scene.add(light)
+        light = new THREE.DirectionalLight(0xffffff)
+        light.position.set(3, 2, -1)
+        light.position.normalize()
+        light.intensity = 0.8
         @scene.add(light)
         light = new THREE.DirectionalLight(0xffffff)
         light.position.set(3, -2, -1)
@@ -206,6 +211,9 @@ class StationViewer
             y = event.layerY
         object = @underPixel(x, y)
         if object?
+            name = object.name
+            if name.indexOf(".") != name.lastIndexOf(".")
+                name = name.slice(0, name.lastIndexOf("."))
             details = @station.objects[object.name]
             if details?
                 title = details.title

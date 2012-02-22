@@ -219,7 +219,12 @@ Station viewer
       light = new THREE.DirectionalLight(0xffffff);
       light.position.set(-3, 2, 1);
       light.position.normalize();
-      light.intensity = 2;
+      light.intensity = 1.1;
+      this.scene.add(light);
+      light = new THREE.DirectionalLight(0xffffff);
+      light.position.set(3, 2, -1);
+      light.position.normalize();
+      light.intensity = 0.8;
       this.scene.add(light);
       light = new THREE.DirectionalLight(0xffffff);
       light.position.set(3, -2, -1);
@@ -230,7 +235,7 @@ Station viewer
     };
 
     StationViewer.prototype.idleMove = function(event) {
-      var details, object, text, title, tooltip, x, y;
+      var details, name, object, text, title, tooltip, x, y;
       if (!(this.root != null)) return;
       x = event.offsetX;
       y = event.offsetY;
@@ -240,6 +245,10 @@ Station viewer
       }
       object = this.underPixel(x, y);
       if (object != null) {
+        name = object.name;
+        if (name.indexOf(".") !== name.lastIndexOf(".")) {
+          name = name.slice(0, name.lastIndexOf("."));
+        }
         details = this.station.objects[object.name];
         if (details != null) {
           title = details.title;
