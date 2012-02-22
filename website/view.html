@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Station Viewer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+    <script src="libraries/jquery.min.js" type="text/javascript"></script>
+    <script src="libraries/RequestAnimationFrame.js" type="text/javascript"></script>
+    <script src="libraries/Three.js" type="text/javascript"></script>
+    <script src="libraries/Stats.js" type="text/javascript"></script>
+    <script src="build/stations.js" type="text/javascript"></script>
+</head>
+<body class="">
+
+    <div id="viewport"></div>
+
+    <script>
+        window.viewer = new StationViewer($('#viewport'));
+        viewer.init();
+        // Load a test world
+        viewer.testWorld();
+        // Run
+        viewer.showFPS();
+        viewer.renderLoop();
+    </script>
+    
+</body>
+</html>

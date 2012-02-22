@@ -1,0 +1,23 @@
+{
+    "title": "West Silvertown",
+    "line": "DLR",
+    "color": "#00bbb4",
+    "camera": {
+        "distance": 60,
+        "bearing": 125,
+        "angle": 35,
+    },
+    "adjustment": {
+        "bearing": -90,
+    },
+    "objects": {
+        "platform.1": {
+            "title": "Platform 1",
+            "summary": "Trains to Woolwich (eastbound)",
+        },
+        "platform.2": {
+            "title": "Platform 2",
+            "summary": "Trains to Stratford and the City (westbound)",
+        }
+    }
+}

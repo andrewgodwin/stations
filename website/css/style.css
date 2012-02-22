@@ -1,0 +1,13 @@
+body {
+    background: #fff;
+    overflow: hidden;
+    font-family: Trebuchet, "Trebuchet MS", sans-serif;
+}
+
+#viewport {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
