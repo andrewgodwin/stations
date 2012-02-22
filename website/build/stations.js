@@ -29,9 +29,14 @@ Station viewer
       this.controls.flipyz = true;
       try {
         this.renderer = new THREE.WebGLRenderer();
+        this.webgl = 1;
+        jQuery(".webgl-switcher").show().click(function() {
+          return _this.toggleWebGL();
+        });
       } catch (error) {
         jQuery(".webgl-error").show();
         this.renderer = new THREE.CanvasRenderer();
+        this.webgl = 0;
       }
       this.container.append(this.renderer.domElement);
       this.resizeRenderer();
@@ -72,11 +77,17 @@ Station viewer
     StationViewer.prototype.loadSystem = function(url, callback) {
       var _this = this;
       return jQuery.getJSON(url, "", function(data) {
-        var code, details, li, line, line_color, line_title, picker, _i, _len, _ref, _ref2;
+        var code, details, li, line, line_color, line_title, picker, _fn, _i, _len, _ref, _ref2;
         _this.system = data;
         _this.system.base_url = url.slice(0, url.lastIndexOf("/") + 1);
         picker = jQuery(".picker .stations").html("");
         _ref = _this.system.stations;
+        _fn = function(code) {
+          return li.click(function() {
+            _this.loadStation(code);
+            return _this.hidePicker();
+          });
+        };
         for (code in _ref) {
           details = _ref[code];
           li = jQuery("<li><h5>" + details.title + "</h5><p></p></li>");
@@ -87,14 +98,26 @@ Station viewer
             line_title = _this.system.lines[line].title;
             li.find("p").append("<span style='background: #" + line_color + "'>" + line_title + "</span>");
           }
-          li.click(function() {
-            _this.loadStation(code);
-            return _this.hidePicker();
-          });
+          _fn(code);
           picker.append(li);
         }
         if (callback != null) return callback();
       });
+    };
+
+    StationViewer.prototype.toggleWebGL = function() {
+      jQuery("canvas").remove();
+      if (this.webgl) {
+        this.renderer = new THREE.CanvasRenderer();
+        this.webgl = 0;
+        jQuery(".webgl-switcher").text("Canvas mode - click to use WebGL");
+      } else {
+        this.renderer = new THREE.WebGLRenderer();
+        this.webgl = 1;
+        jQuery(".webgl-switcher").text("WebGL mode - click to use Canvas");
+      }
+      this.container.append(this.renderer.domElement);
+      return this.resizeRenderer();
     };
 
     StationViewer.prototype.showPicker = function() {
@@ -108,7 +131,7 @@ Station viewer
     StationViewer.prototype.loadStation = function(code, callback) {
       var _this = this;
       return jQuery.getJSON(this.system.base_url + this.system.stations[code].meta, "", function(data) {
-        var line, line_color, line_title, loader, name, title, value, _i, _len, _ref, _ref2;
+        var line, line_color, line_title, loader, name, title, value, _i, _len, _ref, _ref2, _ref3;
         _this.station = data;
         loader = new THREE.SceneLoader();
         loader.load(_this.system.base_url + data['model'], function(obj) {
@@ -117,20 +140,21 @@ Station viewer
         _this.controls.distance = data.camera.distance;
         _this.controls.bearing = (data.camera.bearing / 180) * Math.PI;
         _this.controls.angle = (data.camera.angle / 180) * Math.PI;
+        _this.controls.target.y = (_ref = data.camera.elevation) != null ? _ref : 0;
         jQuery(".header h1").text(data.title);
         jQuery(".header h2").text("");
-        _ref = data.lines;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          line = _ref[_i];
+        _ref2 = data.lines;
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          line = _ref2[_i];
           line_color = _this.system.lines[line].color;
           line_title = _this.system.lines[line].title;
           jQuery(".header h2").append("<span style='background: #" + line_color + "'>" + line_title + "</span>");
         }
         jQuery(".copyright .value").text(data.info.copyright);
         jQuery(".info").html("<dl></dl>");
-        _ref2 = _this.system.infos;
-        for (name in _ref2) {
-          title = _ref2[name];
+        _ref3 = _this.system.infos;
+        for (name in _ref3) {
+          title = _ref3[name];
           value = data.info[name];
           if (value != null) {
             if (typeof value === "boolean") value = value ? "Yes" : "No";

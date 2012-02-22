@@ -24,9 +24,12 @@ class StationViewer
         # Create the WebGL context & renderers
         try
             @renderer = new THREE.WebGLRenderer()
+            @webgl = 1
+            jQuery(".webgl-switcher").show().click(=> @toggleWebGL())
         catch error
             jQuery(".webgl-error").show()
             @renderer = new THREE.CanvasRenderer()
+            @webgl = 0
         @container.append(@renderer.domElement)
         # Set up resizing correctly
         @resizeRenderer()
@@ -54,7 +57,6 @@ class StationViewer
     # Main render function
     render: (delta) ->
         @controls.update(delta)
-        #@camera.lookAt(THREE.Vector3(0,0,0))
         @renderer.render(@scene, @camera)
 
     # Loads a station from its URL
@@ -71,12 +73,26 @@ class StationViewer
                     line_color = @system.lines[line].color
                     line_title = @system.lines[line].title
                     li.find("p").append("<span style='background: #" + line_color + "'>" + line_title + "</span>")
-                li.click(() => (@loadStation(code); @hidePicker()))
+                ((code) => li.click(() => (@loadStation(code); @hidePicker())))(code)
                 picker.append(li)
             # Possibly run a callback
             if callback?
                 callback()
         )
+
+    # Toggles between WebGL and Canvas modes
+    toggleWebGL: ->
+        jQuery("canvas").remove()
+        if @webgl
+            @renderer = new THREE.CanvasRenderer()
+            @webgl = 0
+            jQuery(".webgl-switcher").text("Canvas mode - click to use WebGL")
+        else
+            @renderer = new THREE.WebGLRenderer()
+            @webgl = 1
+            jQuery(".webgl-switcher").text("WebGL mode - click to use Canvas")
+        @container.append(@renderer.domElement)
+        @resizeRenderer()
 
     # Shows the "pick a station" dialog
     showPicker: ->
@@ -101,6 +117,7 @@ class StationViewer
             @controls.distance = data.camera.distance
             @controls.bearing = (data.camera.bearing / 180) * Math.PI
             @controls.angle = (data.camera.angle / 180) * Math.PI
+            @controls.target.y = data.camera.elevation ? 0
             # Arrange the page
             jQuery(".header h1").text(data.title)
             jQuery(".header h2").text("")
