@@ -1,8 +1,44 @@
 
 lines:
+    bakerloo:
+        title: Bakerloo
+        color: ae6119
+    central:
+        title: Central
+        color: e41f1e
+    circle:
+        title: Circle
+        color: fcd005
+    district:
+        title: District
+        color: 0a8136
     dlr:
         title: DLR
-        color: 00bbb4
+        color: 00bbb3
+    handc:
+        title: Hammersmith & City
+        color: f468a0
+    jubilee:
+        title: Jubilee
+        color: 94979a
+    northern:
+        title: Northern
+        color: 231f21
+    metropolitan:
+        title: Metropolitan
+        color: 960153
+    overground:
+        title: Overground
+        color: f46f1a
+    piccadilly:
+        title: Piccadilly
+        color: 263d95
+    victoria:
+        title: Victoria
+        color: 009fe1
+    wandc:
+        title: Waterloo & City
+        color: 87d5b3
 
 materials:
     platform:

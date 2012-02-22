@@ -1,17 +1,18 @@
-title: West Silvertown
-model: ./wst.js
+title: Oxford Circus
+model: ./oxc.js
 lines:
-    - dlr
+    - central
+    - victoria
+    - bakerloo
 
 info:
-    zone: 3
-    opened: 2005
-    ticket_machines: 2
-    gated: false
+    zone: 1
+    opened: 1900
+    ticket_machines: 10
+    gated: true
     copyright: Andrew Godwin, 2012
-    description: West Silvertown was built as part of the King George V extension to the DLR, which opened
-        in November 2005. The station has a typical modern DLR station design, with the structure being
-        clad mostly in glass or grey sheeting.
+    description: Oxford Circus first opened on the Central line in 1900, followed by the Bakerloo line in 1906 and the Victoria line in 1969. The building of the Victoria line resulted in a lot of work at Oxford Circus,
+        including the construction of the current ticket hall to ease congestion.
 
 camera:
     distance: 50
