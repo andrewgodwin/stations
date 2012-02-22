@@ -56,26 +56,28 @@ class StationViewer
 
     # Sets up a test world
     testWorld: ->
+        light = new THREE.DirectionalLight(0xffffff)
+        light.position.set(-3, 2, 1)
+        light.position.normalize()
+        light.intensity = 0.7
+        @scene.add(light)
+        light = new THREE.AmbientLight(0x888888)
+        @scene.add(light)
         # The station
-        material = new THREE.MeshLambertMaterial( { color: 0xffffff, shading: THREE.FlatShading, overdraw: true} )
+        material = new THREE.MeshLambertMaterial( { color: 0xaaccdd, shading: THREE.FlatShading, opacity: 0.9} )
         loader = new THREE.SceneLoader() # true is showStatus
         loader.load(
             "assets/london/wst/wst.js",
             (obj) => (
-                @scene = obj.scene
-                @scene.add(@camera)
-                (
-                    child.material = material
-                    child.doubleSided = true
-                ) for child in @scene.children
-                light = new THREE.DirectionalLight(0xffffff)
-                light.position.set(-3, 2, 1)
-                light.position.normalize()
-                light.intensity = 1
-                @scene.add(light)
-                light = new THREE.AmbientLight(0x666666)
-                light.intensity = 0.1
-                @scene.add(light)
+                @root = new THREE.Object3D()
+                for name, item of obj.objects
+                    item.material = material
+                    item.doubleSided = true
+                    @root.add(item)
+                    console.log(item)
+                @root.rotation.x = -Math.PI / 2
+                @root.rotation.z = Math.PI
+                @scene.add(@root)
             )
         )
 

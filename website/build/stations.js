@@ -63,32 +63,35 @@ Station viewer
     };
 
     StationViewer.prototype.testWorld = function() {
-      var loader, material,
+      var light, loader, material,
         _this = this;
+      light = new THREE.DirectionalLight(0xffffff);
+      light.position.set(-3, 2, 1);
+      light.position.normalize();
+      light.intensity = 0.7;
+      this.scene.add(light);
+      light = new THREE.AmbientLight(0x888888);
+      this.scene.add(light);
       material = new THREE.MeshLambertMaterial({
-        color: 0xffffff,
+        color: 0xaaccdd,
         shading: THREE.FlatShading,
-        overdraw: true
+        opacity: 0.9
       });
       loader = new THREE.SceneLoader();
       return loader.load("assets/london/wst/wst.js", function(obj) {
-        var child, light, _i, _len, _ref;
-        _this.scene = obj.scene;
-        _this.scene.add(_this.camera);
-        _ref = _this.scene.children;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          child = _ref[_i];
-          child.material = material;
-          child.doubleSided = true;
+        var item, name, _ref;
+        _this.root = new THREE.Object3D();
+        _ref = obj.objects;
+        for (name in _ref) {
+          item = _ref[name];
+          item.material = material;
+          item.doubleSided = true;
+          _this.root.add(item);
+          console.log(item);
         }
-        light = new THREE.DirectionalLight(0xffffff);
-        light.position.set(-3, 2, 1);
-        light.position.normalize();
-        light.intensity = 1;
-        _this.scene.add(light);
-        light = new THREE.AmbientLight(0x666666);
-        light.intensity = 0.1;
-        return _this.scene.add(light);
+        _this.root.rotation.x = -Math.PI / 2;
+        _this.root.rotation.z = Math.PI;
+        return _this.scene.add(_this.root);
       });
     };
 
