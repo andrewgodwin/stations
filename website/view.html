@@ -13,16 +13,30 @@
 </head>
 <body class="">
 
-    <div id="viewport"></div>
+    <div class="header">
+        <h1></h1>
+        <h2></h2>
+    </div>
+
+    <div id="viewport">
+        <p class="webgl-error">
+            No <a href="http://get.webgl.org/">WebGL</a>; rendering may be slow.
+        </p>
+        <div class="tooltip"></div>
+    </div>
+
+    <div class="info">
+    </div>
 
     <script>
-        window.viewer = new StationViewer($('#viewport'));
-        viewer.init();
-        // Load a test world
-        viewer.testWorld();
-        // Run
-        viewer.showFPS();
-        viewer.renderLoop();
+        $(function () {
+            window.viewer = new StationViewer($('#viewport'));
+            viewer.init();
+            // Load a test world
+            viewer.loadSystem("build/london/_system.json", function () {viewer.loadStation("wst")});
+            // Run
+            viewer.renderLoop();
+        });
     </script>
     
 </body>

@@ -1,0 +1,45 @@
+title: West Silvertown
+model: ./wst.js
+lines:
+    - dlr
+
+info:
+    zone: 3
+    opened: 2005
+    ticket_machines: 2
+    gated: false
+    modeller: Andrew Godwin
+    description: West Silvertown was built as part of the King George V extension to the DLR, which opened
+        in November 2005. The station has a typical modern DLR station design, with the structure being
+        clad mostly in glass or grey sheeting.
+
+camera:
+    distance: 50
+    bearing: 90
+    angle: 45
+    north: 90
+    grid: 70
+
+objects:
+    platform.1:
+        title: Platform 1
+        text: Trains to Woolwich (eastbound)
+    platform.2:
+        title: Platform 2
+        text: Trains to Stratford and the City (westbound)
+    lift.1:
+        title: Lift to Platform 1
+    lift.2:
+        title: Lift to Platform 2
+    dlr.westbound-1:
+        title: Westbound track
+        text: Towards Canning Town
+    dlr.eastbound-1:
+        title: Eastbound track
+        text: Towards Pontoon Dock
+    dlr.westbound-2:
+        title: Westbound track
+        text: Towards Canning Town
+    dlr.eastbound-2:
+        title: Eastbound track
+        text: Towards Pontoon Dock

@@ -4,28 +4,35 @@ Station viewer
 */
 
 (function() {
-  var StationViewer, TurntableControls;
+  var StationViewer, TurntableControls,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   StationViewer = (function() {
 
     function StationViewer(container) {
       this.container = container;
+      this.idleMove = __bind(this.idleMove, this);
     }
 
     StationViewer.prototype.init = function() {
       var _this = this;
       this.clock = new THREE.Clock;
-      this.camera = new THREE.PerspectiveCamera(70, 1, 0.1, 10000);
+      this.camera = new THREE.PerspectiveCamera(60, 400, 0.1, 10000);
       this.camera.position.set(0, 0, 50);
       this.camera.rotation.set(0, 0, 0);
       this.scene = new THREE.Scene;
       this.scene.add(this.camera);
-      this.controls = new TurntableControls(this.camera, new THREE.Vector3(0, 0, 0));
+      this.controls = new TurntableControls(this.camera, new THREE.Vector3(0, 0, 0), this.container[0], this.idleMove);
       this.controls.bearing = 0;
       this.controls.angle = Math.PI / 6;
       this.controls.distance = 60;
       this.controls.flipyz = true;
-      this.renderer = new THREE.CanvasRenderer();
+      try {
+        this.renderer = new THREE.WebGLRenderer();
+      } catch (error) {
+        jQuery(".webgl-error").show();
+        this.renderer = new THREE.CanvasRenderer();
+      }
       this.container.append(this.renderer.domElement);
       this.resizeRenderer();
       return window.addEventListener('resize', (function() {
@@ -62,37 +69,158 @@ Station viewer
       return this.renderer.render(this.scene, this.camera);
     };
 
-    StationViewer.prototype.testWorld = function() {
-      var light, loader, material,
-        _this = this;
+    StationViewer.prototype.loadSystem = function(url, callback) {
+      var _this = this;
+      return jQuery.getJSON(url, "", function(data) {
+        _this.system = data;
+        _this.system.base_url = url.slice(0, url.lastIndexOf("/") + 1);
+        if (callback != null) return callback();
+      });
+    };
+
+    StationViewer.prototype.loadStation = function(code, callback) {
+      var _this = this;
+      return jQuery.getJSON(this.system.base_url + this.system.stations[code].meta, "", function(data) {
+        var line, line_color, line_title, loader, name, title, value, _i, _len, _ref, _ref2;
+        _this.station = data;
+        loader = new THREE.SceneLoader();
+        loader.load(_this.system.base_url + data['model'], function(obj) {
+          return _this.ingestScene(obj);
+        });
+        _this.controls.distance = data.camera.distance;
+        _this.controls.bearing = (data.camera.bearing / 180) * Math.PI;
+        _this.controls.angle = (data.camera.angle / 180) * Math.PI;
+        jQuery(".header h1").text(data.title);
+        jQuery(".header h2").text("");
+        _ref = data.lines;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          line = _ref[_i];
+          line_color = _this.system.lines[line].color;
+          line_title = _this.system.lines[line].title;
+          jQuery(".header h2").append("<span style='background: #" + line_color + "'>" + line_title + "</span>");
+        }
+        jQuery(".info").html("<dl></dl>");
+        _ref2 = _this.system.infos;
+        for (name in _ref2) {
+          title = _ref2[name];
+          value = data.info[name];
+          if (value != null) {
+            if (typeof value === "boolean") value = value ? "Yes" : "No";
+            jQuery(".info dl").append("<dt>" + title + "</dt>");
+            jQuery(".info dl").append("<dd>" + value + "</dd>");
+          }
+        }
+        if (data.info.description) {
+          jQuery(".info").append("<p>" + data.info.description + "</p>");
+        }
+        if (callback != null) return callback();
+      });
+    };
+
+    StationViewer.prototype.ingestScene = function(scene) {
+      var geometry, grid_size, grid_step, grid_steps, i, item, line, material, material_def, name, _ref, _results;
+      this.cleanWorld();
+      this.root = new THREE.Object3D();
+      _ref = scene.objects;
+      for (name in _ref) {
+        item = _ref[name];
+        material_def = this.system.materials[name.slice(0, name.indexOf("."))];
+        material = new THREE.MeshLambertMaterial({
+          color: eval("0x" + (material_def ? material_def.color : "000000")),
+          shading: THREE.FlatShading,
+          opacity: 0.9
+        });
+        item.material = material;
+        item.doubleSided = true;
+        this.root.add(item);
+      }
+      this.root.rotation.x = -Math.PI / 2;
+      this.root.rotation.z = Math.PI;
+      this.scene.add(this.root);
+      grid_size = this.station.camera.grid;
+      grid_step = 5;
+      grid_steps = grid_size / grid_step;
+      material = new THREE.LineBasicMaterial({
+        color: 0x000000,
+        opacity: 0.05,
+        linewidth: 1
+      });
+      geometry = new THREE.Geometry();
+      geometry.vertices.push(new THREE.Vertex(new THREE.Vector3(-grid_size, 0, 0)));
+      geometry.vertices.push(new THREE.Vertex(new THREE.Vector3(grid_size, 0, 0)));
+      _results = [];
+      for (i = -grid_steps; -grid_steps <= grid_steps ? i <= grid_steps : i >= grid_steps; -grid_steps <= grid_steps ? i++ : i--) {
+        line = new THREE.Line(geometry, material);
+        line.position.z = i * grid_step;
+        this.scene.add(line);
+        line = new THREE.Line(geometry, material);
+        line.rotation.y = Math.PI / 2;
+        line.position.x = i * grid_step;
+        _results.push(this.scene.add(line));
+      }
+      return _results;
+    };
+
+    StationViewer.prototype.cleanWorld = function() {
+      var light;
+      this.scene = new THREE.Scene();
       light = new THREE.DirectionalLight(0xffffff);
       light.position.set(-3, 2, 1);
       light.position.normalize();
-      light.intensity = 0.7;
+      light.intensity = 2;
       this.scene.add(light);
-      light = new THREE.AmbientLight(0x888888);
+      light = new THREE.DirectionalLight(0xffffff);
+      light.position.set(3, -2, -1);
+      light.position.normalize();
+      light.intensity = 0.5;
       this.scene.add(light);
-      material = new THREE.MeshLambertMaterial({
-        color: 0xaaccdd,
-        shading: THREE.FlatShading,
-        opacity: 0.9
-      });
-      loader = new THREE.SceneLoader();
-      return loader.load("assets/london/wst/wst.js", function(obj) {
-        var item, name, _ref;
-        _this.root = new THREE.Object3D();
-        _ref = obj.objects;
-        for (name in _ref) {
-          item = _ref[name];
-          item.material = material;
-          item.doubleSided = true;
-          _this.root.add(item);
-          console.log(item);
+      return this.scene.add(this.camera);
+    };
+
+    StationViewer.prototype.idleMove = function(event) {
+      var details, object, text, title, tooltip, x, y;
+      if (!(this.root != null)) return;
+      x = event.offsetX;
+      y = event.offsetY;
+      if (!((x != null) && (y != null))) {
+        x = event.layerX;
+        y = event.layerY;
+      }
+      object = this.underPixel(x, y);
+      if (object != null) {
+        details = this.station.objects[object.name];
+        if (details != null) {
+          title = details.title;
+          text = details.text != null ? details.text : "";
+          if (text) {
+            tooltip = "<h6>" + title + "</h6><p>" + text + "</p>";
+          } else {
+            tooltip = "<h6>" + title + "</h6>";
+          }
+          return jQuery(".tooltip").html(tooltip).show().css({
+            top: y,
+            left: x + 15
+          });
+        } else {
+          return jQuery(".tooltip").hide();
         }
-        _this.root.rotation.x = -Math.PI / 2;
-        _this.root.rotation.z = Math.PI;
-        return _this.scene.add(_this.root);
-      });
+      } else {
+        return jQuery(".tooltip").hide();
+      }
+    };
+
+    StationViewer.prototype.underPixel = function(x, y) {
+      var hit, intersects, projector, ray, vector;
+      vector = new THREE.Vector3((x / this.container.width()) * 2 - 1, -(y / this.container.height()) * 2 + 1, 0.5);
+      projector = new THREE.Projector();
+      projector.unprojectVector(vector, this.camera);
+      ray = new THREE.Ray(this.camera.position, vector.subSelf(this.camera.position).normalize());
+      intersects = ray.intersectObjects(this.root.children);
+      if (intersects.length > 0) {
+        hit = intersects[0];
+        return hit.object;
+      }
+      return null;
     };
 
     return StationViewer;
@@ -103,17 +231,19 @@ Station viewer
 
   TurntableControls = (function() {
 
-    function TurntableControls(object, target, domElement) {
+    function TurntableControls(object, target, domElement, idleMove) {
       var _this = this;
       this.object = object;
       this.target = target;
       this.domElement = domElement;
+      this.idleMove = idleMove;
       if (this.domElement === void 0) this.domElement = document;
       this.distance = 50;
       this.bearing = 0;
       this.angle = 45;
       this.bearingSpeed = 0.01;
       this.angleSpeed = 0.01;
+      this.zoomSpeed = -0.1;
       this.flipyz = false;
       this.domElement.addEventListener('mousemove', (function(event) {
         return _this.mousemove(event);
@@ -123,6 +253,9 @@ Station viewer
       }), false);
       this.domElement.addEventListener('mouseup', (function(event) {
         return _this.mouseup(event);
+      }), false);
+      this.domElement.addEventListener('mousewheel', (function(event) {
+        return _this.mousewheel(event);
       }), false);
     }
 
@@ -140,11 +273,6 @@ Station viewer
       return this.object.lookAt(this.target);
     };
 
-    TurntableControls.prototype.handleEvent = function(event) {
-      console.log(event);
-      if (typeof this[event.type] === 'function') return this[event.type](event);
-    };
-
     TurntableControls.prototype.mousedown = function(event) {
       event.preventDefault();
       event.stopPropagation();
@@ -158,6 +286,8 @@ Station viewer
       if (this.startX && this.startY) {
         this.bearing = this.startBearing + (event.clientX - this.startX) * this.bearingSpeed;
         return this.angle = Math.max(Math.min(this.startAngle + (event.clientY - this.startY) * this.angleSpeed, Math.PI / 2), -Math.PI / 2);
+      } else if (this.idleMove != null) {
+        return this.idleMove(event);
       }
     };
 
@@ -168,6 +298,12 @@ Station viewer
       this.startY = void 0;
       this.startBearing = void 0;
       return this.startAngle = void 0;
+    };
+
+    TurntableControls.prototype.mousewheel = function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      return this.distance = Math.min(Math.max(this.distance + (event.wheelDeltaY * this.zoomSpeed), 10), 100);
     };
 
     return TurntableControls;

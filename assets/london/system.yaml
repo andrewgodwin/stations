@@ -1,0 +1,21 @@
+
+lines:
+    dlr:
+        title: DLR
+        color: 00bbb4
+
+materials:
+    platform:
+        color: aabbcc
+    stairs:
+        color: bbaacc
+    lift:
+        color: ccaabb
+    dlr:
+        color: 009b94
+
+infos:
+    zone: Fare Zone
+    opened: Opened
+    ticket_machines: Ticket Machines
+    gated: Ticket Barriers?

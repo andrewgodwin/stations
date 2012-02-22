@@ -11,19 +11,22 @@ class StationViewer
         # Create a clock for timing
         @clock = new THREE.Clock
         # Create a camera and controls
-        @camera = new THREE.PerspectiveCamera(70, 1, 0.1, 10000)
+        @camera = new THREE.PerspectiveCamera(60, 400, 0.1, 10000)
         @camera.position.set(0, 0, 50)
         @camera.rotation.set(0, 0, 0)
         @scene = new THREE.Scene
         @scene.add(@camera)
-        @controls = new TurntableControls(@camera, new THREE.Vector3(0, 0, 0))
+        @controls = new TurntableControls(@camera, new THREE.Vector3(0, 0, 0), @container[0], @idleMove)
         @controls.bearing = 0
         @controls.angle = Math.PI/6
         @controls.distance = 60
         @controls.flipyz = true
         # Create the WebGL context & renderers
-        @renderer = new THREE.CanvasRenderer()
-        #@renderer = new THREE.WebGLRenderer()
+        try
+            @renderer = new THREE.WebGLRenderer()
+        catch error
+            jQuery(".webgl-error").show()
+            @renderer = new THREE.CanvasRenderer()
         @container.append(@renderer.domElement)
         # Set up resizing correctly
         @resizeRenderer()
@@ -54,31 +57,147 @@ class StationViewer
         #@camera.lookAt(THREE.Vector3(0,0,0))
         @renderer.render(@scene, @camera)
 
-    # Sets up a test world
-    testWorld: ->
+    # Loads a station from its URL
+    loadSystem: (url, callback) ->
+        jQuery.getJSON(url, "", (data) =>
+            # Save the system data to ourselves
+            @system = data
+            @system.base_url = url.slice(0, url.lastIndexOf("/") + 1)
+            if callback?
+                callback()
+        )
+
+    # Loads a station from its URL
+    loadStation: (code, callback) ->
+        jQuery.getJSON(@system.base_url + @system.stations[code].meta, "", (data) =>
+            # Save the station data to ourselves
+            @station = data
+            # Load the model
+            loader = new THREE.SceneLoader()
+            loader.load(
+                @system.base_url + data['model'],
+                (obj) => @ingestScene(obj),
+            )
+            # Set up the camera
+            @controls.distance = data.camera.distance
+            @controls.bearing = (data.camera.bearing / 180) * Math.PI
+            @controls.angle = (data.camera.angle / 180) * Math.PI
+            # Arrange the page
+            jQuery(".header h1").text(data.title)
+            jQuery(".header h2").text("")
+            for line in data.lines
+                line_color = @system.lines[line].color
+                line_title = @system.lines[line].title
+                jQuery(".header h2").append("<span style='background: #" + line_color + "'>" + line_title + "</span>")
+            jQuery(".info").html("<dl></dl>")
+            # Attributes
+            for name, title of @system.infos
+                value = data.info[name]
+                if value?
+                    if typeof(value) == "boolean"
+                        value = if value then "Yes" else "No"
+                    jQuery(".info dl").append("<dt>" + title + "</dt>")
+                    jQuery(".info dl").append("<dd>" + value + "</dd>")
+            # Description
+            if data.info.description
+                jQuery(".info").append("<p>" + data.info.description + "</p>")
+            if callback?
+                callback()
+        )
+
+    # Takes a SceneLoader result and places it in the world
+    ingestScene: (scene) ->
+        @cleanWorld()
+        @root = new THREE.Object3D()
+        for name, item of scene.objects
+            material_def = @system.materials[name.slice(0, name.indexOf("."))]
+            material = new THREE.MeshLambertMaterial({
+                color: eval("0x" + (if material_def then material_def.color else "000000")),
+                shading: THREE.FlatShading,
+                opacity: 0.9,
+            })
+            item.material = material
+            item.doubleSided = true
+            @root.add(item)
+        @root.rotation.x = -Math.PI / 2
+        @root.rotation.z = Math.PI
+        @scene.add(@root)
+        # Draw the grid
+        grid_size = @station.camera.grid
+        grid_step = 5
+        grid_steps = grid_size / grid_step
+        material = new THREE.LineBasicMaterial({color: 0x000000, opacity: 0.05, linewidth: 1})
+        geometry = new THREE.Geometry()
+        geometry.vertices.push(new THREE.Vertex(new THREE.Vector3(-grid_size, 0, 0)))
+        geometry.vertices.push(new THREE.Vertex(new THREE.Vector3(grid_size, 0, 0)))
+        for i in [-grid_steps..grid_steps]
+            line = new THREE.Line(geometry, material)
+            line.position.z = i * grid_step
+            @scene.add(line)
+            line = new THREE.Line(geometry, material)
+            line.rotation.y = Math.PI/2
+            line.position.x = i * grid_step
+            @scene.add(line)
+
+    # Prepares a nice, clean Scene to put things in
+    cleanWorld: ->
+        @scene = new THREE.Scene()
+        # Lights
         light = new THREE.DirectionalLight(0xffffff)
         light.position.set(-3, 2, 1)
         light.position.normalize()
-        light.intensity = 0.7
+        light.intensity = 2
         @scene.add(light)
-        light = new THREE.AmbientLight(0x888888)
+        light = new THREE.DirectionalLight(0xffffff)
+        light.position.set(3, -2, -1)
+        light.position.normalize()
+        light.intensity = 0.5
         @scene.add(light)
-        # The station
-        material = new THREE.MeshLambertMaterial( { color: 0xaaccdd, shading: THREE.FlatShading, opacity: 0.9} )
-        loader = new THREE.SceneLoader() # true is showStatus
-        loader.load(
-            "assets/london/wst/wst.js",
-            (obj) => (
-                @root = new THREE.Object3D()
-                for name, item of obj.objects
-                    item.material = material
-                    item.doubleSided = true
-                    @root.add(item)
-                    console.log(item)
-                @root.rotation.x = -Math.PI / 2
-                @root.rotation.z = Math.PI
-                @scene.add(@root)
-            )
+        #light = new THREE.AmbientLight(0x888888)
+        #@scene.add(light)
+        # Camera
+        @scene.add(@camera)
+
+    # Places a label as the user hovers over objects
+    idleMove: (event) =>
+        if not @root?
+            return
+        x = event.offsetX
+        y = event.offsetY
+        if not (x? and y?)
+            x = event.layerX
+            y = event.layerY
+        object = @underPixel(x, y)
+        if object?
+            details = @station.objects[object.name]
+            if details?
+                title = details.title
+                text = if details.text? then details.text else ""
+                if text
+                    tooltip = "<h6>" + title + "</h6><p>" + text + "</p>"
+                else
+                    tooltip = "<h6>" + title + "</h6>"
+                jQuery(".tooltip").html(tooltip).show().css({top: y, left: x + 15})
+            else
+                jQuery(".tooltip").hide()
+        else
+            jQuery(".tooltip").hide()
+
+    # Given a pixel position on the drawing area, says what's under it
+    underPixel: (x, y) ->
+        vector = new THREE.Vector3(
+            (x / @container.width()) * 2 - 1,
+            -(y / @container.height()) * 2 + 1,
+            0.5,
         )
+        projector = new THREE.Projector()
+        projector.unprojectVector(vector, @camera)
+        ray = new THREE.Ray(@camera.position, vector.subSelf(@camera.position).normalize())
+        intersects = ray.intersectObjects(@root.children)
+        if intersects.length > 0
+            hit = intersects[0]
+            return hit.object
+        return null
+
 
 window.StationViewer = StationViewer

@@ -1,13 +1,94 @@
 body {
     background: #fff;
-    overflow: hidden;
     font-family: Trebuchet, "Trebuchet MS", sans-serif;
 }
 
-#viewport {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.header {
+    margin: 20px 0 20px 100px;
+    position: relative;
 }
+    .header h1 {
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .header h2 {
+        margin: 10px 0 0 0;
+    }
+        .header h2 span {
+            margin: 0 10px 0 0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #fff;
+            text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+            font-size: 90%;
+            font-weight: bold;
+        }
+
+.info {
+    margin: 20px 100px 20px 100px;
+}
+    .info dl {
+        float: right;
+        width: 350px;
+        margin: 0 0 0 20px;
+        overflow: hidden;
+    }
+        .info dl dt {
+            font-weight: bold;
+            float: left;
+            clear: left;
+            width: 150px;
+            color: #555;
+            text-align: right;
+            margin: 0 10px 10px 0;
+        }
+        .info dl dd {
+            float: left;
+            width: 190px;
+            text-align: left;
+            margin: 0 0 10px 0;
+        }
+    .info p {
+        margin: 20px 100px 20px 0;
+        clear: left;
+        line-height: 150%;
+    }
+
+#viewport {
+    margin: 20px 0 20px 0;
+    background: #eee;
+    width: 100%;
+    height: 400px;
+    position: relative;
+}
+    .tooltip {
+        position: absolute;
+        display: none;
+        background: #fff;
+        font-size: 90%;
+        padding: 5px;
+        border: 1px solid #ccc;
+    }
+        .tooltip h6 {
+            font-weight: bold;
+        }
+        .tooltip p {
+            font-size: 90%;
+            color: #444;
+            margin: 2px 0 0 0;
+        }
+    .webgl-error {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 80%;
+        font-weight: bold;
+        color: #a00;
+        color: rgba(150, 0, 0, 0.5);
+        display: none;
+    }
+        .webgl-error a {
+            color: #c22;
+            color: rgba(250, 0, 0, 0.5);
+            text-decoration: underline;
+        }

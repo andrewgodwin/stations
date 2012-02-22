@@ -1,6 +1,6 @@
 class TurntableControls
 
-    constructor: (@object, @target, @domElement) ->
+    constructor: (@object, @target, @domElement, @idleMove) ->
         if @domElement == undefined
             @domElement = document
         @distance = 50
@@ -8,10 +8,12 @@ class TurntableControls
         @angle = 45
         @bearingSpeed = 0.01
         @angleSpeed = 0.01
+        @zoomSpeed = -0.1
         @flipyz = false
         @domElement.addEventListener('mousemove', ((event) => @mousemove(event)), false)
         @domElement.addEventListener('mousedown', ((event) => @mousedown(event)), false)
         @domElement.addEventListener('mouseup', ((event) => @mouseup(event)), false)
+        @domElement.addEventListener('mousewheel', ((event) => @mousewheel(event)), false)
 
     # Called every frame
     update: (delta) ->
@@ -28,11 +30,6 @@ class TurntableControls
         @object.position = position
         @object.lookAt(@target)
 
-    handleEvent: (event) ->
-        console.log(event)
-        if (typeof this[event.type] == 'function')
-            this[event.type](event)
-
     mousedown: (event) ->
         event.preventDefault()
         event.stopPropagation()
@@ -45,6 +42,8 @@ class TurntableControls
         if @startX and @startY
             @bearing = @startBearing + (event.clientX - @startX) * @bearingSpeed
             @angle = Math.max(Math.min(@startAngle + (event.clientY - @startY) * @angleSpeed, Math.PI/2), -Math.PI/2)
+        else if @idleMove?
+            @idleMove(event)
 
     mouseup: (event) ->
         event.preventDefault()
@@ -53,3 +52,8 @@ class TurntableControls
         @startY = undefined
         @startBearing = undefined
         @startAngle = undefined
+
+    mousewheel: (event) ->
+        event.preventDefault()
+        event.stopPropagation()
+        @distance = Math.min(Math.max(@distance + (event.wheelDeltaY * @zoomSpeed), 10), 100)
