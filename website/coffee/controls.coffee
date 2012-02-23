@@ -1,6 +1,6 @@
 class TurntableControls
 
-    constructor: (@object, @target, @domElement, @idleMove) ->
+    constructor: (@object, @target, @domElement, @idleMove, @setVolatile) ->
         if @domElement == undefined
             @domElement = document
         @distance = 50
@@ -18,7 +18,6 @@ class TurntableControls
     # Called every frame
     update: (delta) ->
         @setCamera()
-        return (@startX and @startY)
 
     # Places the camera in the correct location
     setCamera: ->
@@ -43,6 +42,7 @@ class TurntableControls
         if @startX and @startY
             @bearing = @startBearing + (event.clientX - @startX) * @bearingSpeed
             @angle = Math.max(Math.min(@startAngle + (event.clientY - @startY) * @angleSpeed, Math.PI/2), -Math.PI/2)
+            @setVolatile()
         else if @idleMove?
             @idleMove(event)
 
@@ -58,3 +58,4 @@ class TurntableControls
         event.preventDefault()
         event.stopPropagation()
         @distance = Math.min(Math.max(@distance + (event.wheelDeltaY * @zoomSpeed), 50), 500)
+        @setVolatile()

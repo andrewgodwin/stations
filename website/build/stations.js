@@ -22,7 +22,9 @@ Station viewer
       this.camera.rotation.set(0, 0, 0);
       this.scene = new THREE.Scene;
       this.scene.add(this.camera);
-      this.controls = new TurntableControls(this.camera, new THREE.Vector3(0, 0, 0), this.container[0], this.idleMove);
+      this.controls = new TurntableControls(this.camera, new THREE.Vector3(0, 0, 0), this.container[0], this.idleMove, (function() {
+        return _this.needsRender = true;
+      }));
       this.controls.bearing = 0;
       this.controls.angle = Math.PI / 6;
       this.controls.distance = 60;
@@ -74,7 +76,6 @@ Station viewer
     StationViewer.prototype.render = function(delta) {
       var volatile;
       volatile = this.controls.update(delta);
-      if (volatile) this.needsRender = true;
       if (this.needsRender) this.renderer.render(this.scene, this.camera);
       return this.needsRender = false;
     };
@@ -304,12 +305,13 @@ Station viewer
 
   TurntableControls = (function() {
 
-    function TurntableControls(object, target, domElement, idleMove) {
+    function TurntableControls(object, target, domElement, idleMove, setVolatile) {
       var _this = this;
       this.object = object;
       this.target = target;
       this.domElement = domElement;
       this.idleMove = idleMove;
+      this.setVolatile = setVolatile;
       if (this.domElement === void 0) this.domElement = document;
       this.distance = 50;
       this.bearing = 0;
@@ -333,8 +335,7 @@ Station viewer
     }
 
     TurntableControls.prototype.update = function(delta) {
-      this.setCamera();
-      return this.startX && this.startY;
+      return this.setCamera();
     };
 
     TurntableControls.prototype.setCamera = function() {
@@ -359,7 +360,8 @@ Station viewer
     TurntableControls.prototype.mousemove = function(event) {
       if (this.startX && this.startY) {
         this.bearing = this.startBearing + (event.clientX - this.startX) * this.bearingSpeed;
-        return this.angle = Math.max(Math.min(this.startAngle + (event.clientY - this.startY) * this.angleSpeed, Math.PI / 2), -Math.PI / 2);
+        this.angle = Math.max(Math.min(this.startAngle + (event.clientY - this.startY) * this.angleSpeed, Math.PI / 2), -Math.PI / 2);
+        return this.setVolatile();
       } else if (this.idleMove != null) {
         return this.idleMove(event);
       }
@@ -377,7 +379,8 @@ Station viewer
     TurntableControls.prototype.mousewheel = function(event) {
       event.preventDefault();
       event.stopPropagation();
-      return this.distance = Math.min(Math.max(this.distance + (event.wheelDeltaY * this.zoomSpeed), 50), 500);
+      this.distance = Math.min(Math.max(this.distance + (event.wheelDeltaY * this.zoomSpeed), 50), 500);
+      return this.setVolatile();
     };
 
     return TurntableControls;

@@ -16,7 +16,13 @@ class StationViewer
         @camera.rotation.set(0, 0, 0)
         @scene = new THREE.Scene
         @scene.add(@camera)
-        @controls = new TurntableControls(@camera, new THREE.Vector3(0, 0, 0), @container[0], @idleMove)
+        @controls = new TurntableControls(
+            @camera,
+            new THREE.Vector3(0, 0, 0),
+            @container[0],
+            @idleMove,
+            (() => @needsRender = true),
+        )
         @controls.bearing = 0
         @controls.angle = Math.PI/6
         @controls.distance = 60
@@ -59,8 +65,6 @@ class StationViewer
     # Main render function
     render: (delta) ->
         volatile = @controls.update(delta)
-        if volatile
-            @needsRender = true
         if @needsRender
             @renderer.render(@scene, @camera)
         @needsRender = false
