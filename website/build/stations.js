@@ -27,6 +27,7 @@ Station viewer
       this.controls.angle = Math.PI / 6;
       this.controls.distance = 60;
       this.controls.flipyz = true;
+      this.needsRender = false;
       try {
         this.renderer = new THREE.WebGLRenderer();
         this.webgl = 1;
@@ -57,7 +58,8 @@ Station viewer
     StationViewer.prototype.resizeRenderer = function() {
       this.renderer.setSize(this.container.width(), this.container.height());
       this.camera.aspect = this.container.width() / this.container.height();
-      return this.camera.updateProjectionMatrix();
+      this.camera.updateProjectionMatrix();
+      return this.needsRender = true;
     };
 
     StationViewer.prototype.renderLoop = function() {
@@ -70,8 +72,11 @@ Station viewer
     };
 
     StationViewer.prototype.render = function(delta) {
-      this.controls.update(delta);
-      return this.renderer.render(this.scene, this.camera);
+      var volatile;
+      volatile = this.controls.update(delta);
+      if (volatile) this.needsRender = true;
+      if (this.needsRender) this.renderer.render(this.scene, this.camera);
+      return this.needsRender = false;
     };
 
     StationViewer.prototype.loadSystem = function(url, callback) {
@@ -148,6 +153,7 @@ Station viewer
         _this.controls.bearing = (data.camera.bearing / 180) * Math.PI;
         _this.controls.angle = (data.camera.angle / 180) * Math.PI;
         _this.controls.target.y = (_ref = data.camera.elevation) != null ? _ref : 0;
+        _this.needsRender = true;
         jQuery(".header h1").text(data.title);
         jQuery(".header h2").text("");
         _ref2 = data.lines;
@@ -177,7 +183,7 @@ Station viewer
     };
 
     StationViewer.prototype.ingestScene = function(scene) {
-      var geometry, grid_size, grid_step, grid_steps, i, item, line, material, material_def, name, _ref, _results;
+      var geometry, grid_size, grid_step, grid_steps, i, item, line, material, material_def, name, _ref;
       this.cleanWorld();
       this.root = new THREE.Object3D();
       _ref = scene.objects;
@@ -207,7 +213,6 @@ Station viewer
       geometry = new THREE.Geometry();
       geometry.vertices.push(new THREE.Vertex(new THREE.Vector3(-grid_size, 0, 0)));
       geometry.vertices.push(new THREE.Vertex(new THREE.Vector3(grid_size, 0, 0)));
-      _results = [];
       for (i = -grid_steps; -grid_steps <= grid_steps ? i <= grid_steps : i >= grid_steps; -grid_steps <= grid_steps ? i++ : i--) {
         line = new THREE.Line(geometry, material);
         line.position.z = i * grid_step;
@@ -215,9 +220,9 @@ Station viewer
         line = new THREE.Line(geometry, material);
         line.rotation.y = Math.PI / 2;
         line.position.x = i * grid_step;
-        _results.push(this.scene.add(line));
+        this.scene.add(line);
       }
-      return _results;
+      return this.needsRender = true;
     };
 
     StationViewer.prototype.cleanWorld = function() {
@@ -328,7 +333,8 @@ Station viewer
     }
 
     TurntableControls.prototype.update = function(delta) {
-      return this.setCamera();
+      this.setCamera();
+      return this.startX && this.startY;
     };
 
     TurntableControls.prototype.setCamera = function() {

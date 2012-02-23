@@ -21,6 +21,7 @@ class StationViewer
         @controls.angle = Math.PI/6
         @controls.distance = 60
         @controls.flipyz = true
+        @needsRender = false
         # Create the WebGL context & renderers
         try
             @renderer = new THREE.WebGLRenderer()
@@ -46,6 +47,7 @@ class StationViewer
         @renderer.setSize(@container.width(), @container.height())
         @camera.aspect = @container.width() / @container.height()
         @camera.updateProjectionMatrix()
+        @needsRender = true
 
     # Main render loop
     renderLoop: ->
@@ -56,8 +58,12 @@ class StationViewer
 
     # Main render function
     render: (delta) ->
-        @controls.update(delta)
-        @renderer.render(@scene, @camera)
+        volatile = @controls.update(delta)
+        if volatile
+            @needsRender = true
+        if @needsRender
+            @renderer.render(@scene, @camera)
+        @needsRender = false
 
     # Loads a station from its URL
     loadSystem: (url, callback) ->
@@ -123,6 +129,7 @@ class StationViewer
             @controls.bearing = (data.camera.bearing / 180) * Math.PI
             @controls.angle = (data.camera.angle / 180) * Math.PI
             @controls.target.y = data.camera.elevation ? 0
+            @needsRender = true
             # Arrange the page
             jQuery(".header h1").text(data.title)
             jQuery(".header h2").text("")
@@ -180,6 +187,7 @@ class StationViewer
             line.rotation.y = Math.PI/2
             line.position.x = i * grid_step
             @scene.add(line)
+        @needsRender = true
 
     # Prepares a nice, clean Scene to put things in
     cleanWorld: ->

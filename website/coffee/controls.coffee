@@ -18,6 +18,7 @@ class TurntableControls
     # Called every frame
     update: (delta) ->
         @setCamera()
+        return (@startX and @startY)
 
     # Places the camera in the correct location
     setCamera: ->
