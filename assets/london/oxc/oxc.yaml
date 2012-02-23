@@ -16,9 +16,9 @@ info:
 
 camera:
     distance: 200
-    bearing: 90
-    angle: 45
-    elevation: -20
+    bearing: -45
+    angle: 25
+    elevation: -25
     north: 90
     grid: 70
 
@@ -29,15 +29,33 @@ objects:
     platform.2:
         title: Platform 2 (Central Line)
         text: Trains to West Ruislip and Ealing Broadway (westbound)
-    central.westbound-1:
+    platform.3:
+        title: Platform 3 (Bakerloo Line)
+        text: Trains to Elephant & Castle (southbound)
+    platform.4:
+        title: Platform 4 (Bakerloo Line)
+        text: Trains to Harrow & Wealdstone (northbound)
+    platform.5:
+        title: Platform 5 (Victoria Line)
+        text: Trains to Brixton (southbound)
+    platform.6:
+        title: Platform 6 (Victoria Line)
+        text: Trains to Seven Sisters and Walthamstow (northbound)
+    central.westbound:
         title: Westbound Central Line
         text: Towards Bond Street
-    central.westbound-2:
-        title: Westbound Central Line
-        text: Towards Bond Street
-    central.eastbound-1:
+    central.eastbound:
         title: Eastbound Central Line
         text: Towards Tottenham Court Road
-    central.eastbound-2:
-        title: Eastbound Central Line
-        text: Towards Tottenham Court Road
+    bakerloo.southbound:
+        title: Southbound Bakerloo Line
+        text: Towards Piccadilly Circus
+    bakerloo.northbound:
+        title: Northbound Bakerloo Line
+        text: Towards Regent's Park
+    victoria.southbound:
+        title: Southbound Victoria Line
+        text: Towards Victoria
+    victoria.northbound:
+        title: Northbound Victoria Line
+        text: Towards Warren Street
