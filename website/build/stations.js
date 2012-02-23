@@ -77,23 +77,30 @@ Station viewer
     StationViewer.prototype.loadSystem = function(url, callback) {
       var _this = this;
       return jQuery.getJSON(url, "", function(data) {
-        var code, details, li, line, line_color, line_title, picker, _fn, _i, _len, _ref, _ref2;
+        var code, codes, details, li, line, line_color, line_title, picker, _fn, _i, _j, _len, _len2, _ref, _ref2;
         _this.system = data;
         _this.system.base_url = url.slice(0, url.lastIndexOf("/") + 1);
         picker = jQuery(".picker .stations").html("");
+        codes = [];
         _ref = _this.system.stations;
+        for (code in _ref) {
+          details = _ref[code];
+          codes.push(code);
+        }
+        codes.sort();
         _fn = function(code) {
           return li.click(function() {
             _this.loadStation(code);
             return _this.hidePicker();
           });
         };
-        for (code in _ref) {
-          details = _ref[code];
+        for (_i = 0, _len = codes.length; _i < _len; _i++) {
+          code = codes[_i];
+          details = _this.system.stations[code];
           li = jQuery("<li><h5>" + details.title + "</h5><p></p></li>");
           _ref2 = details.lines;
-          for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-            line = _ref2[_i];
+          for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+            line = _ref2[_j];
             line_color = _this.system.lines[line].color;
             line_title = _this.system.lines[line].title;
             li.find("p").append("<span style='background: #" + line_color + "'>" + line_title + "</span>");

@@ -67,7 +67,12 @@ class StationViewer
             @system.base_url = url.slice(0, url.lastIndexOf("/") + 1)
             # Populate the picker
             picker = jQuery(".picker .stations").html("")
+            codes = []
             for code, details of @system.stations
+                codes.push(code)
+            codes.sort()
+            for code in codes
+                details = @system.stations[code]
                 li = jQuery("<li><h5>" + details.title + "</h5><p></p></li>")
                 for line in details.lines
                     line_color = @system.lines[line].color
