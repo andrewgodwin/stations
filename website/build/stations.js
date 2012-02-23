@@ -17,7 +17,7 @@ Station viewer
     StationViewer.prototype.init = function() {
       var _this = this;
       this.clock = new THREE.Clock;
-      this.camera = new THREE.PerspectiveCamera(60, 400, 0.1, 10000);
+      this.camera = new THREE.PerspectiveCamera(20, 1, 0.0001, 10000);
       this.camera.position.set(0, 0, 50);
       this.camera.rotation.set(0, 0, 0);
       this.scene = new THREE.Scene;
@@ -249,7 +249,7 @@ Station viewer
         if (name.indexOf(".") !== name.lastIndexOf(".")) {
           name = name.slice(0, name.lastIndexOf("."));
         }
-        details = this.station.objects[object.name];
+        details = this.station.objects[name];
         if (details != null) {
           title = details.title;
           text = details.text != null ? details.text : "";
@@ -304,7 +304,7 @@ Station viewer
       this.angle = 45;
       this.bearingSpeed = 0.01;
       this.angleSpeed = 0.01;
-      this.zoomSpeed = -0.1;
+      this.zoomSpeed = -0.2;
       this.flipyz = false;
       this.domElement.addEventListener('mousemove', (function(event) {
         return _this.mousemove(event);
@@ -364,7 +364,7 @@ Station viewer
     TurntableControls.prototype.mousewheel = function(event) {
       event.preventDefault();
       event.stopPropagation();
-      return this.distance = Math.min(Math.max(this.distance + (event.wheelDeltaY * this.zoomSpeed), 10), 100);
+      return this.distance = Math.min(Math.max(this.distance + (event.wheelDeltaY * this.zoomSpeed), 50), 500);
     };
 
     return TurntableControls;

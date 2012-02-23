@@ -11,7 +11,7 @@ class StationViewer
         # Create a clock for timing
         @clock = new THREE.Clock
         # Create a camera and controls
-        @camera = new THREE.PerspectiveCamera(60, 400, 0.1, 10000)
+        @camera = new THREE.PerspectiveCamera(20, 1, 0.0001, 10000)
         @camera.position.set(0, 0, 50)
         @camera.rotation.set(0, 0, 0)
         @scene = new THREE.Scene
@@ -214,7 +214,7 @@ class StationViewer
             name = object.name
             if name.indexOf(".") != name.lastIndexOf(".")
                 name = name.slice(0, name.lastIndexOf("."))
-            details = @station.objects[object.name]
+            details = @station.objects[name]
             if details?
                 title = details.title
                 text = if details.text? then details.text else ""

@@ -8,7 +8,7 @@ class TurntableControls
         @angle = 45
         @bearingSpeed = 0.01
         @angleSpeed = 0.01
-        @zoomSpeed = -0.1
+        @zoomSpeed = -0.2
         @flipyz = false
         @domElement.addEventListener('mousemove', ((event) => @mousemove(event)), false)
         @domElement.addEventListener('mousedown', ((event) => @mousedown(event)), false)
@@ -56,4 +56,4 @@ class TurntableControls
     mousewheel: (event) ->
         event.preventDefault()
         event.stopPropagation()
-        @distance = Math.min(Math.max(@distance + (event.wheelDeltaY * @zoomSpeed), 10), 100)
+        @distance = Math.min(Math.max(@distance + (event.wheelDeltaY * @zoomSpeed), 50), 500)
