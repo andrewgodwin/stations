@@ -16,8 +16,8 @@ info:
 
 camera:
     distance: 200
-    bearing: 60
-    angle: 45
+    bearing: -30
+    angle: 15
     north: 90
     grid: 70
 
