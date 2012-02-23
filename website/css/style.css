@@ -26,13 +26,13 @@ body {
     .picker .stations {
         margin-left: auto;
         margin-right: auto;
-        width: 800px;
+        width: 920px;
     }
         .picker .stations li {
             float: left;
             overflow: hidden;
             margin: 10px 10px 0 0;
-            width: 170px;
+            width: 190px;
             height: 40px;
             border: 1px solid #042547;
             padding: 10px 10px;
