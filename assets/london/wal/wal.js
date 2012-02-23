@@ -519,22 +519,7 @@
 
 "embeds" :
 {
-"emb_Plane.023": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 4,
-        "faces"         : 1,
-        "normals"       : 1,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.023": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -550,27 +535,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.022": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 4,
-        "faces"         : 1,
-        "normals"       : 1,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.022": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -586,27 +553,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.021": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 4,
-        "faces"         : 1,
-        "normals"       : 1,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.021": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -622,27 +571,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.029": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 4,
-        "faces"         : 1,
-        "normals"       : 1,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.029": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -658,27 +589,9 @@
 
     "faces": [33,0,1,2,3,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.028": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 21,
-        "faces"         : 10,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.028": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -694,27 +607,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0,33,0,1,4,5,0,0,0,0,33,5,4,7,6,0,0,0,1,33,4,1,9,8,0,0,0,0,33,8,9,10,11,0,0,0,0,33,10,9,13,12,0,0,1,0,33,8,11,14,15,0,0,1,0,33,11,10,17,16,0,0,0,0,33,16,17,18,19,0,0,0,0,32,18,20,19,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.040": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.040": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -730,27 +625,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.064": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.064": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -766,27 +643,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.063": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.063": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -802,27 +661,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.062": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.062": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -838,27 +679,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.061": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.061": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -874,27 +697,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.060": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.060": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -910,27 +715,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.049": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.049": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -946,27 +733,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0,33,0,1,4,5,0,0,1,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.048": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.048": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -982,27 +751,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 4,
-        "faces"         : 1,
-        "normals"       : 1,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1018,27 +769,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.034": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 4,
-        "faces"         : 1,
-        "normals"       : 1,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.034": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1054,27 +787,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.035": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 8,
-        "faces"         : 6,
-        "normals"       : 8,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.035": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1090,27 +805,9 @@
 
     "faces": [33,0,3,2,1,0,1,2,3,33,2,3,4,5,2,1,4,5,33,3,0,7,4,1,0,6,4,33,0,1,6,7,0,3,7,6,33,1,2,5,6,3,2,5,7,33,5,4,7,6,5,4,6,7]
 
+},
 
-
-}
-,
-
-"emb_Plane.036": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 8,
-        "faces"         : 6,
-        "normals"       : 8,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.036": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1126,27 +823,9 @@
 
     "faces": [33,0,3,2,1,0,1,2,3,33,2,3,4,5,2,1,4,5,33,3,0,7,4,1,0,6,4,33,0,1,6,7,0,3,7,6,33,1,2,5,6,3,2,5,7,33,5,4,7,6,5,4,6,7]
 
+},
 
-
-}
-,
-
-"emb_Plane.037": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 4,
-        "faces"         : 1,
-        "normals"       : 1,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.037": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1162,27 +841,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.030": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 39,
-        "faces"         : 19,
-        "normals"       : 15,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.030": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1198,27 +859,9 @@
 
     "faces": [33,0,1,2,3,0,0,0,0,33,2,5,4,3,0,1,2,0,32,3,4,6,0,2,3,33,6,4,8,7,3,2,4,5,33,7,8,9,10,5,4,6,0,33,9,8,12,11,6,4,7,7,33,3,6,13,14,0,3,8,9,33,13,6,16,15,8,3,0,0,33,14,13,18,17,9,8,8,9,33,17,18,19,20,9,8,10,11,33,20,19,22,21,11,10,11,11,33,19,18,24,23,10,8,0,0,33,21,22,25,26,11,11,11,11,33,19,23,27,28,10,0,0,0,33,26,25,30,29,11,11,12,12,33,5,2,32,31,1,0,1,13,33,31,32,33,34,13,1,0,14,33,31,34,35,36,13,14,14,14,33,36,35,38,37,14,14,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.033": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.033": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1234,27 +877,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.038": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 4,
-        "faces"         : 1,
-        "normals"       : 1,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.038": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1270,27 +895,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.039": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.039": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1306,27 +913,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.050": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.050": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1342,27 +931,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0,33,0,1,4,5,0,0,1,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.051": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.051": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1378,27 +949,9 @@
 
     "faces": [33,0,3,2,1,0,0,0,0,33,0,1,4,5,0,0,1,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.047": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.047": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1414,27 +967,9 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
+},
 
-
-}
-,
-
-"emb_Plane.046": {
-
-    "metadata" :
-    {
-        "formatVersion" : 3,
-        "generatedBy"   : "Blender 2.62 Exporter",
-        "vertices"      : 6,
-        "faces"         : 2,
-        "normals"       : 2,
-        "colors"        : 0,
-        "uvs"           : 0,
-        "materials"     : 0,
-        "morphTargets"  : 0
-    },
-
-    "scale" : 1.000000,
+"emb_Plane.046": {    "scale" : 1.000000,
 
     "materials": [],
 
@@ -1450,10 +985,7 @@
 
     "faces": [33,0,3,2,1,0,0,1,0,33,0,1,4,5,0,0,0,0]
 
-
-
 }
-
 },
 
 
