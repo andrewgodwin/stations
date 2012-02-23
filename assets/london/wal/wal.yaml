@@ -1,0 +1,58 @@
+title: Walthamstow Central
+model: ./wal.js
+lines:
+    - victoria
+    - nr
+
+info:
+    zone: 3
+    opened: 1869
+    ticket_machines: 3
+    gated: true
+    copyright: Andrew Godwin, 2012
+    description: The northern terminus of the Victoria line, Walthamstow Central was in fact originally
+        planned to be a through station, with a terminus at Wood Street (Walthamstow), but the plan was
+        cut short in the early 1960s and the line terminated here instead. The tunnels still continue 
+        beyond the end of the station a full train length, and are used to store trains overnight.
+
+camera:
+    distance: 250
+    bearing: 80
+    angle: 45
+    elevation: -15
+    north: 90
+    grid: 120
+
+objects:
+    platform.1:
+        title: Platform 1 (Victoria Line)
+        text: Trains to Brixton
+    platform.2:
+        title: Platform 2 (Victoria Line)
+        text: Trains to Brixton
+    platform.nr1:
+        title: Platform 1 (National Rail)
+        text: Trains to Liverpool Street
+    platform.nr2:
+        title: Platform 2 (National Rail)
+        text: Trains to Chingford
+    victoria.southbound:
+        title: Southbound Victoria Line
+        text: Towards Blackhorse Road
+    nr.southbound:
+        title: Southbound National Rail
+        text: Towards St James Street
+    nr.northbound:
+        title: Northbound National Rail
+        text: Towards Wood Street
+    tickethall.n:
+        title: Ticket hall
+    escalator.n:
+        title: Escalators
+        text: Two, with central staircase
+    lift.1:
+        title: Lift
+        text: From subway to ticket hall only
+    lift.2:
+        title: Lift
+        text: From subway to street only

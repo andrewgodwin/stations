@@ -15,7 +15,7 @@ info:
         including the construction of the current ticket hall to ease congestion.
 
 camera:
-    distance: 50
+    distance: 200
     bearing: 90
     angle: 45
     elevation: -20

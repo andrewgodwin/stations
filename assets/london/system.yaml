@@ -39,6 +39,9 @@ lines:
     wandc:
         title: Waterloo & City
         color: 87d5b3
+    nr:
+        title: National Rail
+        color: 4b128c
 
 materials:
     platform:
@@ -54,12 +57,34 @@ materials:
     escalator:
         color: 887799
 
-    dlr:
-        color: 009b94
+    bakerloo:
+        color: ae6119
     central:
         color: b40f0e
+    circle:
+        color: fcd005
+    district:
+        color: 0a8136
+    dlr:
+        color: 009b94
+    handc:
+        color: f468a0
+    jubilee:
+        color: 94979a
+    northern:
+        color: 231f21
+    metropolitan:
+        color: 960153
+    overground:
+        color: f46f1a
+    piccadilly:
+        color: 263d95
     victoria:
         color: 008fd1
+    wandc:
+        color: 87d5b3
+    nr:
+        color: 4b128c
 
 infos:
     zone: Fare Zone

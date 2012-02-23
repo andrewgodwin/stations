@@ -2,6 +2,7 @@ title: Seven Sisters
 model: ./svs.js
 lines:
     - victoria
+    - nr
 
 info:
     zone: 3
@@ -14,9 +15,9 @@ info:
         stop in the middle platform, while the outside platforms are for the usual through services.
 
 camera:
-    distance: 60
-    bearing: -90
-    angle: 55
+    distance: 250
+    bearing: -60
+    angle: 40
     elevation: -15
     north: 90
     grid: 90

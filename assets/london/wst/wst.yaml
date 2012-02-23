@@ -14,9 +14,9 @@ info:
         clad mostly in glass or grey sheeting.
 
 camera:
-    distance: 50
+    distance: 150
     bearing: 90
-    angle: 45
+    angle: 35
     north: 90
     grid: 70
 
