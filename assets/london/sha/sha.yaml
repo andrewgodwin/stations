@@ -1,0 +1,50 @@
+title: Shadwell
+model: ./sha.js
+lines:
+    - dlr
+    - overground
+
+info:
+    zone: 2
+    opened: 1876
+    ticket_machines: 4
+    gated: Overground only
+    copyright: Andrew Godwin, 2012
+    description: The original Shadwell station was on the East London line, and a DLR station joined it
+        when the DLR opened in 1987. The East London Line closed in 2007 and reopened in 2010 as the
+        Overground, and the old East London Line station was significantly refurbished in the process.
+
+camera:
+    distance: 200
+    bearing: 60
+    angle: 45
+    north: 90
+    grid: 70
+
+objects:
+    platform.1:
+        title: Platform 1 (DLR)
+        text: Trains to Lewisham, Woolwich and Beckton (eastbound)
+    platform.2:
+        title: Platform 2 (DLR)
+        text: Trains to Bank and Tower Gateway (westbound)
+    platform.ov1:
+        title: Platform 1 (Overground)
+        text: Trains to Highbury and Islington
+    platform.ov2:
+        title: Platform 2 (Overground)
+        text: Trains to New Cross and West Croydon
+    lift.1:
+        title: Lift to Platforms
+    dlr.westbound:
+        title: Westbound DLR track
+        text: Towards Bank/Tower Gateway
+    dlr.eastbound:
+        title: Eastbound DLR track
+        text: Towards Limehouse
+    overground.northbound:
+        title: Northbound Overground track
+        text: Towards Whitechapel
+    overground.southbound:
+        title: Southbound Overground track
+        text: Towards Wapping
