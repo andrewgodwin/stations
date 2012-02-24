@@ -48,15 +48,18 @@ body {
                 margin: 0 0 5px 0;
                 font-size: 110%;
             }
-            .picker .stations p span {
-                margin: 0 5px 0 0;
-                padding: 1px 3px;
-                border-radius: 3px;
-                color: #fff;
-                text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
-                font-size: 70%;
-                font-weight: bold;
+            .picker .stations p {
+                white-space: nowrap;
             }
+                .picker .stations p span {
+                    margin: 0 5px 0 0;
+                    padding: 1px 3px;
+                    border-radius: 3px;
+                    color: #fff;
+                    text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+                    font-size: 70%;
+                    font-weight: bold;
+                }
 
 .header {
     margin: 20px 0 20px 100px;
@@ -78,6 +81,15 @@ body {
         text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
         font-size: 90%;
     }
+    .header .camera {
+        margin: 15px 100px 0 0;
+        float: right;
+        clear: right;
+        font-size: 80%;
+    }
+        .header .camera select {
+            width: 150px;
+        }
     .header h1 {
         font-size: 40px;
         font-weight: bold;

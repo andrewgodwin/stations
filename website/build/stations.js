@@ -12,6 +12,7 @@ Station viewer
     function StationViewer(container) {
       this.container = container;
       this.idleMove = __bind(this.idleMove, this);
+      this.showCamera = __bind(this.showCamera, this);
     }
 
     StationViewer.prototype.init = function() {
@@ -32,7 +33,8 @@ Station viewer
       this.needsRender = false;
       try {
         this.renderer = new THREE.WebGLRenderer();
-        this.webgl = 1;
+        this.renderer = new THREE.CanvasRenderer();
+        this.webgl = 0;
         jQuery(".webgl-switcher").show().click(function() {
           return _this.toggleWebGL();
         });
@@ -75,6 +77,7 @@ Station viewer
 
     StationViewer.prototype.render = function(delta) {
       var volatile;
+      TWEEN.update();
       volatile = this.controls.update(delta);
       if (this.needsRender) this.renderer.render(this.scene, this.camera);
       return this.needsRender = false;
@@ -144,31 +147,40 @@ Station viewer
     StationViewer.prototype.loadStation = function(code, callback) {
       var _this = this;
       return jQuery.getJSON(this.system.base_url + this.system.stations[code].meta, "", function(data) {
-        var line, line_color, line_title, loader, name, title, value, _i, _len, _ref, _ref2, _ref3;
+        var line, line_color, line_title, loader, name, numCameras, settings, title, value, _i, _len, _ref, _ref2, _ref3, _ref4;
         _this.station = data;
         loader = new THREE.SceneLoader();
         loader.load(_this.system.base_url + data['model'], function(obj) {
           return _this.ingestScene(obj);
         });
-        _this.controls.distance = data.camera.distance;
-        _this.controls.bearing = (data.camera.bearing / 180) * Math.PI;
-        _this.controls.angle = (data.camera.angle / 180) * Math.PI;
-        _this.controls.target.y = (_ref = data.camera.elevation) != null ? _ref : 0;
-        _this.needsRender = true;
+        jQuery(".camera select").empty();
+        numCameras = 0;
+        _ref = _this.station.cameras;
+        for (name in _ref) {
+          settings = _ref[name];
+          jQuery(".camera select").append("<option value='" + name + "'>" + ((_ref2 = settings.title) != null ? _ref2 : name) + "</option>");
+          numCameras += 1;
+        }
+        if (numCameras > 1) {
+          jQuery(".camera").show();
+        } else {
+          jQuery(".camera").hide();
+        }
+        _this.showCamera("default");
         jQuery(".header h1").text(data.title);
         jQuery(".header h2").text("");
-        _ref2 = data.lines;
-        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-          line = _ref2[_i];
+        _ref3 = data.lines;
+        for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
+          line = _ref3[_i];
           line_color = _this.system.lines[line].color;
           line_title = _this.system.lines[line].title;
           jQuery(".header h2").append("<span style='background: #" + line_color + "'>" + line_title + "</span>");
         }
         jQuery(".copyright .value").text(data.info.copyright);
         jQuery(".info").html("<dl></dl>");
-        _ref3 = _this.system.infos;
-        for (name in _ref3) {
-          title = _ref3[name];
+        _ref4 = _this.system.infos;
+        for (name in _ref4) {
+          title = _ref4[name];
           value = data.info[name];
           if (value != null) {
             if (typeof value === "boolean") value = value ? "Yes" : "No";
@@ -181,6 +193,40 @@ Station viewer
         }
         if (callback != null) return callback();
       });
+    };
+
+    StationViewer.prototype.showCamera = function(name, speed) {
+      var camera, end, pos, tween, _ref, _ref2, _ref3,
+        _this = this;
+      camera = this.station.cameras[name];
+      pos = {
+        distance: this.controls.distance,
+        bearing: this.controls.bearing,
+        angle: this.controls.angle,
+        x: this.controls.target.x,
+        y: this.controls.target.y,
+        z: this.controls.target.z
+      };
+      end = {
+        distance: camera.distance,
+        bearing: (camera.bearing / 180) * Math.PI,
+        angle: (camera.angle / 180) * Math.PI,
+        x: -((_ref = camera.horizontal) != null ? _ref : 0),
+        y: (_ref2 = camera.elevation) != null ? _ref2 : 0,
+        z: (_ref3 = camera.vertical) != null ? _ref3 : 0
+      };
+      tween = new TWEEN.Tween(pos).to(end, speed != null ? speed : 1);
+      tween.onUpdate(function() {
+        _this.controls.distance = pos.distance;
+        _this.controls.bearing = pos.bearing;
+        _this.controls.angle = pos.angle;
+        _this.controls.target.x = pos.x;
+        _this.controls.target.y = pos.y;
+        _this.controls.target.z = pos.z;
+        return _this.needsRender = true;
+      });
+      tween.easing(TWEEN.Easing.Quadratic.EaseInOut).start();
+      return console.log(tween);
     };
 
     StationViewer.prototype.ingestScene = function(scene) {
@@ -203,7 +249,7 @@ Station viewer
       this.root.rotation.x = -Math.PI / 2;
       this.root.rotation.z = Math.PI;
       this.scene.add(this.root);
-      grid_size = this.station.camera.grid;
+      grid_size = this.station.environment.grid;
       grid_step = 5;
       grid_steps = grid_size / grid_step;
       material = new THREE.LineBasicMaterial({
@@ -306,32 +352,27 @@ Station viewer
   TurntableControls = (function() {
 
     function TurntableControls(object, target, domElement, idleMove, setVolatile) {
-      var _this = this;
       this.object = object;
       this.target = target;
       this.domElement = domElement;
       this.idleMove = idleMove;
       this.setVolatile = setVolatile;
+      this.mousewheel = __bind(this.mousewheel, this);
+      this.mouseup = __bind(this.mouseup, this);
+      this.mousemove = __bind(this.mousemove, this);
+      this.mousedown = __bind(this.mousedown, this);
       if (this.domElement === void 0) this.domElement = document;
       this.distance = 50;
       this.bearing = 0;
       this.angle = 45;
       this.bearingSpeed = 0.01;
       this.angleSpeed = 0.01;
-      this.zoomSpeed = -0.2;
+      this.zoomSpeed = -20;
       this.flipyz = false;
-      this.domElement.addEventListener('mousemove', (function(event) {
-        return _this.mousemove(event);
-      }), false);
-      this.domElement.addEventListener('mousedown', (function(event) {
-        return _this.mousedown(event);
-      }), false);
-      this.domElement.addEventListener('mouseup', (function(event) {
-        return _this.mouseup(event);
-      }), false);
-      this.domElement.addEventListener('mousewheel', (function(event) {
-        return _this.mousewheel(event);
-      }), false);
+      this.domElement.addEventListener('mousemove', this.mousemove, false);
+      this.domElement.addEventListener('mousedown', this.mousedown, false);
+      this.domElement.addEventListener('mouseup', this.mouseup, false);
+      jQuery(this.domElement).mousewheel(this.mousewheel);
     }
 
     TurntableControls.prototype.update = function(delta) {
@@ -343,7 +384,7 @@ Station viewer
       horizontal = new THREE.Vector3(Math.sin(this.bearing), 0, -Math.cos(this.bearing));
       position = horizontal.normalize().multiplyScalar(Math.cos(this.angle));
       position.y = Math.sin(this.angle);
-      position = position.multiplyScalar(this.distance);
+      position = position.multiplyScalar(this.distance).addSelf(this.target);
       this.object.position = position;
       return this.object.lookAt(this.target);
     };
@@ -376,10 +417,11 @@ Station viewer
       return this.startAngle = void 0;
     };
 
-    TurntableControls.prototype.mousewheel = function(event) {
+    TurntableControls.prototype.mousewheel = function(event, delta) {
       event.preventDefault();
       event.stopPropagation();
-      this.distance = Math.min(Math.max(this.distance + (event.wheelDeltaY * this.zoomSpeed), 50), 500);
+      console.log(event, delta);
+      this.distance = Math.min(Math.max(this.distance + (delta * this.zoomSpeed), 50), 500);
       return this.setVolatile();
     };
 

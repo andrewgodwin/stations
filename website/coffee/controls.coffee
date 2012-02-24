@@ -8,12 +8,12 @@ class TurntableControls
         @angle = 45
         @bearingSpeed = 0.01
         @angleSpeed = 0.01
-        @zoomSpeed = -0.2
+        @zoomSpeed = -20
         @flipyz = false
-        @domElement.addEventListener('mousemove', ((event) => @mousemove(event)), false)
-        @domElement.addEventListener('mousedown', ((event) => @mousedown(event)), false)
-        @domElement.addEventListener('mouseup', ((event) => @mouseup(event)), false)
-        @domElement.addEventListener('mousewheel', ((event) => @mousewheel(event)), false)
+        @domElement.addEventListener('mousemove', @mousemove, false)
+        @domElement.addEventListener('mousedown', @mousedown, false)
+        @domElement.addEventListener('mouseup', @mouseup, false)
+        jQuery(@domElement).mousewheel(@mousewheel)
 
     # Called every frame
     update: (delta) ->
@@ -26,11 +26,11 @@ class TurntableControls
         # And the vertical location and distance from centre
         position = horizontal.normalize().multiplyScalar(Math.cos(@angle))
         position.y = Math.sin(@angle)
-        position = position.multiplyScalar(@distance)
+        position = position.multiplyScalar(@distance).addSelf(@target)
         @object.position = position
         @object.lookAt(@target)
 
-    mousedown: (event) ->
+    mousedown: (event) =>
         event.preventDefault()
         event.stopPropagation()
         @startX = event.clientX
@@ -38,7 +38,7 @@ class TurntableControls
         @startBearing = @bearing
         @startAngle = @angle
 
-    mousemove: (event) ->
+    mousemove: (event) =>
         if @startX and @startY
             @bearing = @startBearing + (event.clientX - @startX) * @bearingSpeed
             @angle = Math.max(Math.min(@startAngle + (event.clientY - @startY) * @angleSpeed, Math.PI/2), -Math.PI/2)
@@ -46,7 +46,7 @@ class TurntableControls
         else if @idleMove?
             @idleMove(event)
 
-    mouseup: (event) ->
+    mouseup: (event) =>
         event.preventDefault()
         event.stopPropagation()
         @startX = undefined
@@ -54,8 +54,9 @@ class TurntableControls
         @startBearing = undefined
         @startAngle = undefined
 
-    mousewheel: (event) ->
+    mousewheel: (event, delta) =>
         event.preventDefault()
         event.stopPropagation()
-        @distance = Math.min(Math.max(@distance + (event.wheelDeltaY * @zoomSpeed), 50), 500)
+        console.log(event, delta)
+        @distance = Math.min(Math.max(@distance + (delta * @zoomSpeed), 50), 500)
         @setVolatile()

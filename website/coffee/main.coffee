@@ -31,7 +31,9 @@ class StationViewer
         # Create the WebGL context & renderers
         try
             @renderer = new THREE.WebGLRenderer()
-            @webgl = 1
+            # Default to Canvas for now, as it's better
+            @renderer = new THREE.CanvasRenderer()
+            @webgl = 0
             jQuery(".webgl-switcher").show().click(=> @toggleWebGL())
         catch error
             jQuery(".webgl-error").show()
@@ -64,6 +66,7 @@ class StationViewer
 
     # Main render function
     render: (delta) ->
+        TWEEN.update()
         volatile = @controls.update(delta)
         if @needsRender
             @renderer.render(@scene, @camera)
@@ -128,12 +131,19 @@ class StationViewer
                 @system.base_url + data['model'],
                 (obj) => @ingestScene(obj),
             )
-            # Set up the camera
-            @controls.distance = data.camera.distance
-            @controls.bearing = (data.camera.bearing / 180) * Math.PI
-            @controls.angle = (data.camera.angle / 180) * Math.PI
-            @controls.target.y = data.camera.elevation ? 0
-            @needsRender = true
+            # Set up the camera stuff
+            jQuery(".camera select").empty()
+            numCameras = 0
+            for name, settings of @station.cameras
+                jQuery(".camera select").append(
+                    "<option value='" + name + "'>" + (settings.title ? name) + "</option>"
+                )
+                numCameras += 1
+            if numCameras > 1
+                jQuery(".camera").show()
+            else
+                jQuery(".camera").hide()
+            @showCamera("default")
             # Arrange the page
             jQuery(".header h1").text(data.title)
             jQuery(".header h2").text("")
@@ -158,6 +168,37 @@ class StationViewer
                 callback()
         )
 
+    showCamera: (name, speed) =>
+        camera = @station.cameras[name]
+        pos = {
+            distance: @controls.distance,
+            bearing: @controls.bearing,
+            angle: @controls.angle,
+            x: @controls.target.x,
+            y: @controls.target.y,
+            z: @controls.target.z,
+        }
+        end = {
+            distance: camera.distance,
+            bearing: (camera.bearing / 180) * Math.PI,
+            angle: (camera.angle / 180) * Math.PI,
+            x: -(camera.horizontal ? 0),
+            y: camera.elevation ? 0,
+            z: camera.vertical ? 0,
+        }
+        tween = new TWEEN.Tween(pos).to(end, speed ? 1)
+        tween.onUpdate(() =>
+            @controls.distance = pos.distance
+            @controls.bearing = pos.bearing
+            @controls.angle = pos.angle
+            @controls.target.x = pos.x
+            @controls.target.y = pos.y
+            @controls.target.z = pos.z
+            @needsRender = true
+        )
+        tween.easing(TWEEN.Easing.Quadratic.EaseInOut).start()
+        console.log(tween)
+
     # Takes a SceneLoader result and places it in the world
     ingestScene: (scene) ->
         @cleanWorld()
@@ -176,7 +217,7 @@ class StationViewer
         @root.rotation.z = Math.PI
         @scene.add(@root)
         # Draw the grid
-        grid_size = @station.camera.grid
+        grid_size = @station.environment.grid
         grid_step = 5
         grid_steps = grid_size / grid_step
         material = new THREE.LineBasicMaterial({color: 0x000000, opacity: 0.05, linewidth: 1})

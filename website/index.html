@@ -6,24 +6,29 @@
     <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
     <script src="libraries/jquery.min.js" type="text/javascript"></script>
+    <script src="libraries/jquery.mousewheel.min.js" type="text/javascript"></script>
     <script src="libraries/RequestAnimationFrame.js" type="text/javascript"></script>
     <script src="libraries/Three.js" type="text/javascript"></script>
     <script src="libraries/Stats.js" type="text/javascript"></script>
+    <script src="libraries/Tween.js" type="text/javascript"></script>
     <script src="build/stations.js" type="text/javascript"></script>
 </head>
 <body class="">
 
     <div class="header">
         <a class="pick">Select Station</a>
+        <div class="camera">
+            Focus: <select></select>
+        </div>
         <h1></h1>
         <h2></h2>
     </div>
 
     <div id="viewport">
         <p class="webgl-error">
-            No <a href="http://get.webgl.org/">WebGL</a>; rendering may be slow.
+            Canvas mode - no <a href="http://get.webgl.org/">WebGL</a> available.
         </p>
-        <p class="webgl-switcher">WebGL mode - click to use Canvas</p>
+        <p class="webgl-switcher">Canvas mode - click to use WebGL</p>
         <div class="tooltip"></div>
         <p class="copyright">
             &copy; <span class="value"></span>
@@ -47,6 +52,9 @@
                 viewer.showPicker();
             });
             $("a.pick").click(viewer.showPicker)
+            $(".camera select").change(function () {
+                viewer.showCamera($(".camera select").val(), 1000)
+            })
             viewer.renderLoop();
         });
     </script>
