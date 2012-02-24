@@ -14,11 +14,15 @@ info:
         in 1968, and the depot entrance is still located here. Trains terminating here and entering the depot
         stop in the middle platform, while the outside platforms are for the usual through services.
 
-camera:
-    distance: 250
-    bearing: -60
-    angle: 40
-    elevation: -15
+cameras:
+    default:
+        title: Overview
+        distance: 250
+        bearing: -60
+        angle: 40
+        elevation: -15
+
+environment:
     north: 90
     grid: 90
 

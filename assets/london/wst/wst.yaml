@@ -14,10 +14,15 @@ info:
         features a curved roof over the platforms. The station mainly serves the residents of Britannia
         Village.
 
-camera:
-    distance: 150
-    bearing: 90
-    angle: 35
+cameras:
+    default:
+        title: Overview
+        distance: 150
+        bearing: 90
+        angle: 35
+        elevation: 0
+
+environment:
     north: 90
     grid: 70
 

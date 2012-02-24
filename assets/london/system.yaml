@@ -91,3 +91,21 @@ infos:
     opened: Opened
     ticket_machines: Ticket Machines
     gated: Ticket Barriers
+
+# Handy notes - not used really
+train-length:
+    bakerloo: 112
+    central: 130
+    northern: 105
+    dlr: 85
+    wandc: 65
+    district: 110
+    circle: 100
+    handc: 100
+    piccadilly: 105
+    metropolitan: 130
+    victoria: 135
+    jubilee: 125
+    overground-ell: 100
+    overground-ell-short: 80
+    overground-nll: 60

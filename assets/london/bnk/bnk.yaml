@@ -1,0 +1,152 @@
+title: Bank/Monument
+model: ./bnk.js
+lines:
+    - central
+    - northern
+    - dlr
+    - circle
+    - district
+    - wandc
+
+info:
+    zone: 1
+    opened: 1884
+    ticket_machines: Unknown
+    gated: true
+    copyright: Andrew Godwin, 2012
+    description: Bank/Monument is arguably one of the most complex stations on the Underground, with six different
+        lines and ten platforms. Even though Bank and Monument stations are
+        named separately on the Tube map, they are actually one giant complex, with the Northern and DLR
+        platforms actually being somewhere in the middle between the two station entrances.
+
+cameras:
+    default:
+        title: Overview
+        distance: 400
+        bearing: 50
+        angle: 35
+        elevation: -20
+        horizontal: 0
+        vertical: 0
+    central:
+        title: Central Line
+        distance: 170
+        bearing: 0
+        angle: 25
+        elevation: -20
+        horizontal: 10
+        vertical: 80
+    wandc:
+        title: Waterloo and City Line
+        distance: 120
+        bearing: 0
+        angle: 25
+        elevation: -20
+        horizontal: -110
+        vertical: 80
+    northern:
+        title: Northern Line
+        distance: 170
+        bearing: 90
+        angle: 45
+        elevation: -30
+        horizontal: 35
+        vertical: -30
+    dlr:
+        title: DLR
+        distance: 170
+        bearing: 90
+        angle: 45
+        elevation: -40
+        horizontal: 15
+        vertical: -25
+    district:
+        title: District/Circle Lines
+        distance: 170
+        bearing: 180
+        angle: 45
+        elevation: 0
+        horizontal: 95
+        vertical: -130
+
+environment:
+    north: 90
+    grid: 160
+
+objects:
+    platform.1:
+        title: Platform 1 (District/Circle Lines)
+        text: Trains to Earl's Court and Edgware Road (westbound)
+    platform.2:
+        title: Platform 2 (District/Circle Lines)
+        text: Trains to Uxbridge and Hammersmith (eastbound)
+    platform.3:
+        title: Platform 3 (Northern Line)
+        text: Trains to Morden (southbound)
+    platform.4:
+        title: Platform 4 (Northern Line)
+        text: Trains to Edgware and High Barnet (northbound)
+    platform.5:
+        title: Platform 5 (Central Line)
+        text: Trains to West Ruislip and Ealing Broadway (westbound)
+    platform.6:
+        title: Platform 6 (Central Line)
+        text: Trains to Epping and Hainault (eastbound)
+    platform.7:
+        title: Platform 7 (Waterloo and City Line)
+        text: Trains to Waterloo (westbound)
+    platform.8:
+        title: Platform 8 (Waterloo and City Line)
+        text: Trains to Waterloo (eastbound)
+    platform.9:
+        title: Platform 9 (DLR)
+        text: Trains to Woolwich, Beckton and Lewisham (eastbound)
+    platform.10:
+        title: Platform 10 (DLR)
+        text: Terminating trains (westbound)
+    central.westbound:
+        title: Westbound Central Line
+        text: Towards St Paul's
+    central.eastbound:
+        title: Eastbound Central Line
+        text: Towards Liverpool Street
+    northern.southbound:
+        title: Southbound Northern Line
+        text: Towards London Bridge
+    northern.northbound:
+        title: Northbound Northern Line
+        text: Towards Moorgate
+    dlr.southbound:
+        title: Eastbound DLR
+        text: Towards Shadwell
+    dlr.northbound:
+        title: Westbound DLR 
+        text: Towards reversing siding
+    wandc.westbound:
+        title: Westbound Waterloo and City Line 
+        text: Towards Waterloo
+    district.westbound:
+        title: Westbound District/Circle Line 
+        text: Towards Cannon Street
+    district.eastbound:
+        title: Eastbound District/Circle Line 
+        text: Towards Tower Hill
+    escalator.dlrs:
+        title: Escalators
+        text: Two, with central staircase
+    escalator.dlrn:
+        title: Escalators
+        text: Two, with central staircase
+    escalator.wandc:
+        title: Travelators
+        text: Two, with offset stepped ramp
+    escalator.nls:
+        title: Escalators
+    tickethall.monument:
+        title: Ticket Hall (Monument)
+    lift.northern:
+        title: Lift
+        text: Between ticket hall and Northern Line concourse
+    lift.dlr:
+        title: Lift
+        text: Between DLR and Northern Line concourse
