@@ -88,7 +88,7 @@ body {
         font-size: 80%;
     }
         .header .camera select {
-            width: 150px;
+            min-width: 150px;
         }
     .header h1 {
         font-size: 40px;

@@ -133,13 +133,16 @@ class StationViewer
             )
             # Set up the camera stuff
             jQuery(".camera select").empty()
-            numCameras = 0
+            cameraNames = []
             for name, settings of @station.cameras
+                cameraNames.push(name)
+            cameraNames = cameraNames.sort()
+            for name in cameraNames
+                settings = @station.cameras[name]
                 jQuery(".camera select").append(
                     "<option value='" + name + "'>" + (settings.title ? name) + "</option>"
                 )
-                numCameras += 1
-            if numCameras > 1
+            if cameraNames.length > 1
                 jQuery(".camera").show()
             else
                 jQuery(".camera").hide()
@@ -197,7 +200,7 @@ class StationViewer
             @needsRender = true
         )
         tween.easing(TWEEN.Easing.Quadratic.EaseInOut).start()
-        console.log(tween)
+        jQuery(".camera select").val(name)
 
     # Takes a SceneLoader result and places it in the world
     ingestScene: (scene) ->

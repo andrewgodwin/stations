@@ -147,21 +147,26 @@ Station viewer
     StationViewer.prototype.loadStation = function(code, callback) {
       var _this = this;
       return jQuery.getJSON(this.system.base_url + this.system.stations[code].meta, "", function(data) {
-        var line, line_color, line_title, loader, name, numCameras, settings, title, value, _i, _len, _ref, _ref2, _ref3, _ref4;
+        var cameraNames, line, line_color, line_title, loader, name, settings, title, value, _i, _j, _len, _len2, _ref, _ref2, _ref3, _ref4;
         _this.station = data;
         loader = new THREE.SceneLoader();
         loader.load(_this.system.base_url + data['model'], function(obj) {
           return _this.ingestScene(obj);
         });
         jQuery(".camera select").empty();
-        numCameras = 0;
+        cameraNames = [];
         _ref = _this.station.cameras;
         for (name in _ref) {
           settings = _ref[name];
-          jQuery(".camera select").append("<option value='" + name + "'>" + ((_ref2 = settings.title) != null ? _ref2 : name) + "</option>");
-          numCameras += 1;
+          cameraNames.push(name);
         }
-        if (numCameras > 1) {
+        cameraNames = cameraNames.sort();
+        for (_i = 0, _len = cameraNames.length; _i < _len; _i++) {
+          name = cameraNames[_i];
+          settings = _this.station.cameras[name];
+          jQuery(".camera select").append("<option value='" + name + "'>" + ((_ref2 = settings.title) != null ? _ref2 : name) + "</option>");
+        }
+        if (cameraNames.length > 1) {
           jQuery(".camera").show();
         } else {
           jQuery(".camera").hide();
@@ -170,8 +175,8 @@ Station viewer
         jQuery(".header h1").text(data.title);
         jQuery(".header h2").text("");
         _ref3 = data.lines;
-        for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
-          line = _ref3[_i];
+        for (_j = 0, _len2 = _ref3.length; _j < _len2; _j++) {
+          line = _ref3[_j];
           line_color = _this.system.lines[line].color;
           line_title = _this.system.lines[line].title;
           jQuery(".header h2").append("<span style='background: #" + line_color + "'>" + line_title + "</span>");
@@ -226,7 +231,7 @@ Station viewer
         return _this.needsRender = true;
       });
       tween.easing(TWEEN.Easing.Quadratic.EaseInOut).start();
-      return console.log(tween);
+      return jQuery(".camera select").val(name);
     };
 
     StationViewer.prototype.ingestScene = function(scene) {
