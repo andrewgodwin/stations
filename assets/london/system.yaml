@@ -91,6 +91,7 @@ infos:
     opened: Opened
     ticket_machines: Ticket Machines
     gated: Ticket Barriers
+    usage: Passengers per year
 
 # Handy notes - not used really
 train-length:

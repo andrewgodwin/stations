@@ -217,6 +217,9 @@ Station viewer
         if (data.info.description) {
           jQuery(".info").append("<p>" + data.info.description + "</p>");
         }
+        if (data.info.model_notes) {
+          jQuery(".info").append("<h2 class='model_notes'>Modeller's Notes</h2><p class='model_notes'>" + data.info.model_notes + "</p>");
+        }
         if (callback != null) return callback();
       });
     };

@@ -7,8 +7,8 @@ lines:
 info:
     zone: 3
     opened: 1869
-    ticket_machines: 3
     gated: true
+    usage: 16 million
     copyright: Andrew Godwin, 2012
     description: The northern terminus of the Victoria line, Walthamstow Central was in fact originally
         planned to be a through station, with a terminus at Wood Street (Walthamstow), but the plan was

@@ -184,9 +184,11 @@ class StationViewer
                         value = if value then "Yes" else "No"
                     jQuery(".info dl").append("<dt>" + title + "</dt>")
                     jQuery(".info dl").append("<dd>" + value + "</dd>")
-            # Description
+            # Descriptio/notes
             if data.info.description
                 jQuery(".info").append("<p>" + data.info.description + "</p>")
+            if data.info.model_notes
+                jQuery(".info").append("<h2 class='model_notes'>Modeller's Notes</h2><p class='model_notes'>" + data.info.model_notes + "</p>")
             if callback?
                 callback()
         )

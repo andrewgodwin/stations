@@ -11,15 +11,15 @@ lines:
 info:
     zone: 1
     opened: 1884
-    ticket_machines: Unknown
     gated: true
+    usage: 44 million
     copyright: Andrew Godwin, 2012
     description: Bank/Monument is arguably one of the most complex stations on the Underground, with six different
         lines and ten platforms. Even though Bank and Monument stations are
         named separately on the Tube map, they are actually one giant complex, with the Northern and DLR
         platforms actually being somewhere in the middle between the two station entrances.
-    model_notes: The Bank ticket hall here is modelled far too simply, and the positioning of some of the
-        escalators and stairs may be a little off (even on foot, this station is hard to model).
+    model_notes: This is an incredibly difficult station to model, and most of this was done on foot - thus,
+        angles and positioning may be slightly wrong. The Bank ticket hall is also rather misrepresented.
 
 cameras:
     default:

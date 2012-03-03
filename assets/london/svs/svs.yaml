@@ -7,8 +7,8 @@ lines:
 info:
     zone: 3
     opened: 1968
-    ticket_machines: Unknown
     gated: true
+    usage: 15 million
     copyright: Andrew Godwin, 2012
     description: Seven Sisters was originally the northern terminus of the Victoria Line when it opened
         in 1968, and the depot entrance is still located here. Trains terminating here and entering the depot

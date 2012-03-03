@@ -132,8 +132,23 @@ body {
             margin: 0 0 10px 0;
         }
     .info p {
-        margin: 20px 100px 20px 0;
+        margin: 20px 0 20px 0;
         clear: left;
+        line-height: 150%;
+        width: 500px;
+    }
+    .info h2 {
+        margin: 20px 0 -13px 0;
+        clear: left;
+        line-height: 150%;
+        font-weight: bold;
+        color: #333;
+    }
+    .info p.model_notes {
+        margin: 20px 0 20px 0;
+        clear: left;
+        font-size: 80%;
+        color: #444;
         line-height: 150%;
     }
 

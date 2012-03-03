@@ -8,8 +8,8 @@ lines:
 info:
     zone: 1
     opened: 1900
-    ticket_machines: 10
     gated: true
+    usage: 70 million
     copyright: Andrew Godwin, 2012
     description: Oxford Circus first opened on the Central line in 1900, followed by the Bakerloo line in 1906 and the Victoria line in 1969. The building of the Victoria line resulted in a lot of work at Oxford Circus,
         including the construction of the current ticket hall to ease congestion.
