@@ -402,6 +402,10 @@ Station viewer
       this.domElement.addEventListener('mousemove', this.mousemove, false);
       this.domElement.addEventListener('mousedown', this.mousedown, false);
       this.domElement.addEventListener('mouseup', this.mouseup, false);
+      this.domElement.addEventListener('touchmove', this.mousemove, false);
+      this.domElement.addEventListener('touchstart', this.mousedown, false);
+      this.domElement.addEventListener('touchend', this.mouseup, false);
+      this.domElement.addEventListener('touchcancel', this.mouseup, false);
       jQuery(this.domElement).mousewheel(this.mousewheel);
     }
 
@@ -420,18 +424,22 @@ Station viewer
     };
 
     TurntableControls.prototype.mousedown = function(event) {
+      var _ref, _ref2;
       event.preventDefault();
       event.stopPropagation();
-      this.startX = event.clientX;
-      this.startY = event.clientY;
+      this.startX = (_ref = event.clientX) != null ? _ref : event.targetTouches[0].pageX;
+      this.startY = (_ref2 = event.clientY) != null ? _ref2 : event.targetTouches[0].pageY;
       this.startBearing = this.bearing;
       return this.startAngle = this.angle;
     };
 
     TurntableControls.prototype.mousemove = function(event) {
+      var x, y, _ref, _ref2;
       if (this.startX && this.startY) {
-        this.bearing = this.startBearing + (event.clientX - this.startX) * this.bearingSpeed;
-        this.angle = Math.max(Math.min(this.startAngle + (event.clientY - this.startY) * this.angleSpeed, Math.PI / 2), -Math.PI / 2);
+        x = (_ref = event.clientX) != null ? _ref : event.targetTouches[0].pageX;
+        y = (_ref2 = event.clientX) != null ? _ref2 : event.targetTouches[0].pageY;
+        this.bearing = this.startBearing + (x - this.startX) * this.bearingSpeed;
+        this.angle = Math.max(Math.min(this.startAngle + (y - this.startY) * this.angleSpeed, Math.PI / 2), -Math.PI / 2);
         return this.setVolatile();
       } else if (this.idleMove != null) {
         return this.idleMove(event);
@@ -450,7 +458,6 @@ Station viewer
     TurntableControls.prototype.mousewheel = function(event, delta) {
       event.preventDefault();
       event.stopPropagation();
-      console.log(event, delta);
       this.distance = Math.min(Math.max(this.distance + (delta * this.zoomSpeed), 50), 500);
       return this.setVolatile();
     };
