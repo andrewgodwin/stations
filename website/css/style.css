@@ -137,11 +137,12 @@ body {
         line-height: 150%;
         width: 500px;
     }
-    .info h2 {
-        margin: 20px 0 -13px 0;
+    .info h2.model_notes {
+        margin: 20px 0 -16px 0;
         clear: left;
         line-height: 150%;
         font-weight: bold;
+        font-size: 90%;
         color: #333;
     }
     .info p.model_notes {

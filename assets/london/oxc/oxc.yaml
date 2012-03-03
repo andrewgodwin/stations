@@ -1,9 +1,9 @@
 title: Oxford Circus
 model: ./oxc.js
 lines:
+    - bakerloo
     - central
     - victoria
-    - bakerloo
 
 info:
     zone: 1

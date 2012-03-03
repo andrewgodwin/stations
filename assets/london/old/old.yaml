@@ -1,0 +1,81 @@
+title: Old Street
+model: ./old.js
+lines:
+    - northern
+    - nr
+
+info:
+    zone: 1
+    opened: 1901
+    gated: true
+    usage: 21 million
+    copyright: Andrew Godwin, 2012
+    description: Old Street is one of the few stations in Central London with fully tunneled National
+        Rail platforms. The platforms and tunnels that route uses were at one time part of the Underground,
+        however - first the Metropolitan Line, then as a branch of the Northern Line.
+    model_notes: I'm not quite sure regarding the lengths of the corridor sections here, but the rest
+        of the station layout is reasonably accurate.
+
+cameras:
+    default:
+        title: Overview
+        distance: 300
+        bearing: 90
+        angle: 35
+        elevation: -15
+        horizontal: 0
+        vertical: 0
+    northern:
+        title: Northern Line
+        distance: 200
+        bearing: 90
+        angle: 45
+        elevation: -25
+        horizontal: 0
+        vertical: -50
+    nr:
+        title: National Rail
+        distance: 200
+        bearing: 90
+        angle: 45
+        elevation: -15
+        horizontal: 0
+        vertical: 50
+
+environment:
+    north: 0
+    grid: 100
+
+objects:
+    platform.1:
+        title: Platform 1 (Northern Line)
+        text: Trains to Edgware and High Barnet (northbound)
+    platform.2:
+        title: Platform 2 (Northern Line)
+        text: Trains to Morden (southbound)
+    platform.3:
+        title: Platform 3 (National Rail)
+        text: Trains to Welwyn Garden City (northbound)
+    platform.4:
+        title: Platform 4 (National Rail)
+        text: Trains to Moorgate (southbound)
+    northern.southbound:
+        title: Southbound Northern Line
+        text: Towards Moorgate
+    northern.northbound:
+        title: Northbound Northern Line
+        text: Towards Angel
+    nr.northbound:
+        title: Northbound National Rail 
+        text: Towards Essex Road
+    nr.southbound:
+        title: Southbound National Rail 
+        text: Towards Moorgate
+    escalator.down:
+        title: Escalator
+        text: One, down only
+    escalator.up:
+        title: Escalators
+        text: Two, up only
+    tickethall.main:
+        title: Ticket Hall

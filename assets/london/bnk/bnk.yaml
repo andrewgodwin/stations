@@ -2,10 +2,10 @@ title: Bank/Monument
 model: ./bnk.js
 lines:
     - central
-    - northern
-    - dlr
     - circle
     - district
+    - dlr
+    - northern
     - wandc
 
 info:

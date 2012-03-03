@@ -1,0 +1,178 @@
+title: King's Cross St. Pancras
+model: ./kxx.js
+lines:
+    - circle
+    - handc
+    - metropolitan
+    - northern
+    - piccadilly
+    - victoria
+
+info:
+    zone: 1
+    opened: 1863
+    gated: true
+    usage: 73 million
+    copyright: Andrew Godwin, 2012
+    description: King's Cross St. Pancras has less platforms than Bank/Monument but serves two mainline stations,
+        and so is significantly busier. It was also the location of the King's Cross fire in 1987, which killed
+        31 people and led to the removal of wooden escalators from the Underground as well as the banning
+        of smoking on the system - two factors which contributed to the deadly blaze.
+    model_notes: This is a tricky one, and done mostly from memory and a cutaway picture I was able to find.
+        The exits may well be a little off, and Pentonville Road is missing completely.
+
+cameras:
+    default:
+        title: Overview
+        distance: 350
+        bearing: -20
+        angle: 35
+        elevation: -20
+        horizontal: 0
+        vertical: 10
+    northern:
+        title: Northern Line
+        distance: 200
+        bearing: 150
+        angle: 45
+        elevation: -28
+        horizontal: -50
+        vertical: 10
+    victoria:
+        title: Victoria Line
+        distance: 200
+        bearing: 0
+        angle: 45
+        elevation: -17
+        horizontal: 100
+        vertical: 0
+    piccadilly:
+        title: Piccadilly Line
+        distance: 200
+        bearing: -60
+        angle: 45
+        elevation: -23
+        horizontal: 60
+        vertical: 70
+    circle:
+        title: Circle/HandC/Met Line
+        distance: 200
+        bearing: -30
+        angle: 45
+        elevation: -8
+        horizontal: -70
+        vertical: -55
+    northtickethall:
+        title: Northern Ticket Hall
+        distance: 200
+        bearing: 90
+        angle: 45
+        elevation: -3
+        horizontal: -35
+        vertical: 90
+    easttickethall:
+        title: Eastern Ticket Hall
+        distance: 150
+        bearing: 0
+        angle: 45
+        elevation: -4
+        horizontal: -20
+        vertical: 10
+
+environment:
+    north: -10
+    grid: 160
+
+objects:
+    platform.1:
+        title: Platform 1 (Metropolitan/H&C/Circle lines)
+        text: Trains to Hammersmith, Watford, Amersha, and Uxbridge (westbound)
+    platform.2:
+        title: Platform 2 (Metropolitan/H&C/Circle lines)
+        text: Trains to Aldgate and Barking (eastbound)
+    platform.3:
+        title: Platform 3 (Victoria Line)
+        text: Trains to Brixton (southbound)
+    platform.4:
+        title: Platform 4 (Victoria Line)
+        text: Trains to Seven Sisters and Walthamstow (northbound)
+    platform.5:
+        title: Platform 5 (Piccadilly Line)
+        text: Trains to Heathrow and Uxbridge (westbound)
+    platform.6:
+        title: Platform 6 (Piccadilly Line)
+        text: Trains to Cockfosters (eastbound)
+    platform.7:
+        title: Platform 7 (Northern Line)
+        text: Trains to Edgware and High Barnet (northbound)
+    platform.8:
+        title: Platform 8 (Northern Line)
+        text: Trains to Morden (southbound)
+
+    northern.southbound:
+        title: Southbound Northern Line
+        text: Towards Angel
+    northern.northbound:
+        title: Northbound Northern Line
+        text: Towards Euston
+    victoria.southbound:
+        title: Southbound Victoria Line
+        text: Towards Euston
+    victoria.northbound:
+        title: Northbound Victoria Line
+        text: Towards Highbury & Islington
+    piccadilly.northbound:
+        title: Northbound Piccadilly Line
+        text: Towards Caledonian Road
+    piccadilly.southbound:
+        title: Southbound Piccadilly Line
+        text: Towards Russell Square
+    circle.westbound:
+        title: Westbound Circle Line
+        text: Towards Farringdon
+    circle.eastbound:
+        title: Eastbound Circle Line
+        text: Towards Euston Square
+
+    escalator.down:
+        title: Escalator
+        text: One, down only
+    escalator.up:
+        title: Escalators
+        text: Two, up only
+
+    lift.northern:
+        title: Lift
+        text: Between the ticket hall and the Northern line
+    lift.tickethalleast:
+        title: Lift
+        text: Between the ticket hall and street level
+    lift.tickethallnorth:
+        title: Lift
+        text: Between the ticket hall and street level
+    lift.pancrasback:
+        title: Lift
+        text: Between the ticket hall and St. Pancras station
+    lift.circle:
+        title: Lift
+        text: Between the ticket hall and Circle line platform
+    lift.northernnorth:
+        title: Lift
+        text: Between the ticket hall and passageway
+    lift.piccadilly:
+        title: Lift
+        text: Between the passageway and the Piccadilly line
+    lift.victoria:
+        title: Lift
+        text: Between the passageway and the Victoria line
+
+    tickethall.north:
+        title: Northern Ticket Hall
+        text: For the Northern and Piccadilly lines
+    tickethall.east:
+        title: Eastern Ticket Hall
+        text: For the Piccadilly and Victoria lines
+    tickethall.west:
+        title: Western Ticket Hall
+        text: For the Circle, H & C and Metropolitan lines
+
