@@ -30,9 +30,12 @@ Station viewer
       this.controls.angle = Math.PI / 6;
       this.controls.distance = 60;
       this.controls.flipyz = true;
+      this.addCompass();
       this.needsRender = false;
       try {
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({
+          antialias: true
+        });
         this.renderer = new THREE.CanvasRenderer();
         this.webgl = 0;
         jQuery(".webgl-switcher").show().click(function() {
@@ -48,6 +51,24 @@ Station viewer
       return window.addEventListener('resize', (function() {
         return _this.resizeRenderer();
       }), false);
+    };
+
+    StationViewer.prototype.addCompass = function() {
+      var loader,
+        _this = this;
+      this.compassRoot = new THREE.Gyroscope();
+      this.compassRoot.position.x = -3.5;
+      this.compassRoot.position.y = 1.4;
+      this.compassRoot.position.z = -10;
+      this.camera.add(this.compassRoot);
+      loader = new THREE.JSONLoader();
+      return loader.load("build/north-arrow.js", (function(geom) {
+        _this.compass = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({
+          color: 0xaa4444
+        }));
+        _this.compass.scale = new THREE.Vector3(0.2, 0.2, 0.2);
+        return _this.compassRoot.add(_this.compass);
+      }));
     };
 
     StationViewer.prototype.showFPS = function() {
@@ -235,7 +256,7 @@ Station viewer
     };
 
     StationViewer.prototype.ingestScene = function(scene) {
-      var geometry, grid_size, grid_step, grid_steps, i, item, line, material, material_def, name, _ref;
+      var geometry, grid_size, grid_step, grid_steps, i, item, line, material, material_def, name, _ref, _ref2;
       this.cleanWorld();
       this.root = new THREE.Object3D();
       _ref = scene.objects;
@@ -274,7 +295,8 @@ Station viewer
         line.position.x = i * grid_step;
         this.scene.add(line);
       }
-      return this.needsRender = true;
+      this.needsRender = true;
+      return this.compass.rotation.y = (Math.PI * (180 + ((_ref2 = this.station.environment.north) != null ? _ref2 : 0))) / 180;
     };
 
     StationViewer.prototype.cleanWorld = function() {

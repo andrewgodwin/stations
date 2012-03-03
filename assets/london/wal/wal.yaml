@@ -14,17 +14,19 @@ info:
         planned to be a through station, with a terminus at Wood Street (Walthamstow), but the plan was
         cut short in the early 1960s and the line terminated here instead. The tunnels still continue 
         beyond the end of the station a full train length, and are used to store trains overnight.
+    model_notes: This was done entirely from memory, so the number of tunnels between the platforms and
+        other small features may be slightly wrong.
 
 cameras:
     default:
         title: Overview
         distance: 250
-        bearing: 80
+        bearing: -110
         angle: 45
         elevation: -15
 
 environment:
-    north: 90
+    north: 60
     grid: 120
 
 objects:

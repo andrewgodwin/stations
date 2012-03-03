@@ -13,14 +13,17 @@ info:
     copyright: Andrew Godwin, 2012
     description: Oxford Circus first opened on the Central line in 1900, followed by the Bakerloo line in 1906 and the Victoria line in 1969. The building of the Victoria line resulted in a lot of work at Oxford Circus,
         including the construction of the current ticket hall to ease congestion.
+    model_notes: The passageways between the two sets of lines here were modelled on foot, so may be slightly wrong.
 
 cameras:
     default:
         title: Overview
-        distance: 200
-        bearing: -45
+        distance: 300
+        bearing: -135
         angle: 25
         elevation: -25
+        horizontal: -20
+        vertical: -20
     central:
         title: Central Line
         distance: 160
@@ -39,8 +42,8 @@ cameras:
         vertical: 20
 
 environment:
-    north: 90
-    grid: 70
+    north: 0
+    grid: 100
 
 objects:
     platform.1:
@@ -79,3 +82,17 @@ objects:
     victoria.northbound:
         title: Northbound Victoria Line
         text: Towards Warren Street
+    escalator.maine:
+        title: Escalators
+        text: Two, up only
+    escalator.mainw:
+        title: Escalators
+        text: Two, down only
+    escalator.vle:
+        title: Escalators
+        text: Two, no stairs
+    escalator.vlw:
+        title: Escalators
+        text: Two, no stairs
+    escalator.cl:
+        title: Escalators

@@ -10,9 +10,9 @@ info:
     gated: false
     copyright: Andrew Godwin, 2012
     description: West Silvertown was built as part of the King George V extension to the DLR, which opened
-        in November 2005. Like many DLR stations, it is elevated, and like other stations on the extension,
-        features a curved roof over the platforms. The station mainly serves the residents of Britannia
-        Village.
+        in November 2005. There were plans for a station between here and Canning Town, but they
+        were placed on hold and the extension built without it, making that stretch of track one of the
+        longest gaps between stations on the DLR (and the longest one without a tunnel).
 
 cameras:
     default:
@@ -23,7 +23,7 @@ cameras:
         elevation: 0
 
 environment:
-    north: 90
+    north: -90
     grid: 70
 
 objects:

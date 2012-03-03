@@ -18,16 +18,18 @@ info:
         lines and ten platforms. Even though Bank and Monument stations are
         named separately on the Tube map, they are actually one giant complex, with the Northern and DLR
         platforms actually being somewhere in the middle between the two station entrances.
+    model_notes: The Bank ticket hall here is modelled far too simply, and the positioning of some of the
+        escalators and stairs may be a little off (even on foot, this station is hard to model).
 
 cameras:
     default:
         title: Overview
-        distance: 400
+        distance: 500
         bearing: 50
         angle: 35
         elevation: -20
-        horizontal: 0
-        vertical: 0
+        horizontal: 20
+        vertical: -20
     central:
         title: Central Line
         distance: 170
@@ -70,8 +72,8 @@ cameras:
         vertical: -130
 
 environment:
-    north: 90
-    grid: 160
+    north: 0
+    grid: 180
 
 objects:
     platform.1:
@@ -142,8 +144,14 @@ objects:
         text: Two, with offset stepped ramp
     escalator.nls:
         title: Escalators
+        text: Two, no staircase
+    escalator.cls:
+        title: Escalators
+        text: Two, no staircase
     tickethall.monument:
         title: Ticket Hall (Monument)
+    tickethall.bank:
+        title: Ticket Hall (Bank)
     lift.northern:
         title: Lift
         text: Between ticket hall and Northern Line concourse

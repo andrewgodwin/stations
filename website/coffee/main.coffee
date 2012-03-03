@@ -27,10 +27,11 @@ class StationViewer
         @controls.angle = Math.PI/6
         @controls.distance = 60
         @controls.flipyz = true
+        @addCompass()
         @needsRender = false
         # Create the WebGL context & renderers
         try
-            @renderer = new THREE.WebGLRenderer()
+            @renderer = new THREE.WebGLRenderer({antialias: true})
             # Default to Canvas for now, as it's better
             @renderer = new THREE.CanvasRenderer()
             @webgl = 0
@@ -43,6 +44,25 @@ class StationViewer
         # Set up resizing correctly
         @resizeRenderer()
         window.addEventListener('resize', (=> @resizeRenderer()), false)
+
+    # Adds a compass to the world
+    addCompass: ->
+        # Add the gyroscope node
+        @compassRoot = new THREE.Gyroscope()
+        @compassRoot.position.x = -3.5
+        @compassRoot.position.y = 1.4
+        @compassRoot.position.z = -10
+        @camera.add(@compassRoot)
+        # Add a compass model
+        loader = new THREE.JSONLoader()
+        loader.load(
+            "build/north-arrow.js",
+            ((geom) =>
+                @compass = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({color: 0xaa4444}))
+                @compass.scale = new THREE.Vector3(0.2, 0.2, 0.2)
+                @compassRoot.add(@compass)
+            ),
+        )
 
     # Shows/hides the FPS counter
     showFPS: ->
@@ -236,6 +256,8 @@ class StationViewer
             line.position.x = i * grid_step
             @scene.add(line)
         @needsRender = true
+        # Align the compass
+        @compass.rotation.y = (Math.PI * (180 + (@station.environment.north ? 0))) / 180
 
     # Prepares a nice, clean Scene to put things in
     cleanWorld: ->

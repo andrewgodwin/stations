@@ -13,6 +13,8 @@ info:
     description: The original Shadwell station was on the East London line, and a DLR station joined it
         when the DLR opened in 1987. The East London Line closed in 2007 and reopened in 2010 as the
         Overground, and the old East London Line station was significantly refurbished in the process.
+    model_notes: While these are two separate stations in nearly every sense apart from the name,
+        they're shown together here for relative positioning and depth.
 
 cameras:
     default:

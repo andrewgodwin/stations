@@ -13,6 +13,7 @@ info:
     description: Seven Sisters was originally the northern terminus of the Victoria Line when it opened
         in 1968, and the depot entrance is still located here. Trains terminating here and entering the depot
         stop in the middle platform, while the outside platforms are for the usual through services.
+    model_notes: This model does not yet include the National Rail platforms.
 
 cameras:
     default:
@@ -23,7 +24,7 @@ cameras:
         elevation: -15
 
 environment:
-    north: 90
+    north: 45
     grid: 90
 
 objects:
