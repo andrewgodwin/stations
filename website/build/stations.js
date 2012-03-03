@@ -424,20 +424,29 @@ Station viewer
     };
 
     TurntableControls.prototype.mousedown = function(event) {
-      var _ref, _ref2;
       event.preventDefault();
       event.stopPropagation();
-      this.startX = (_ref = event.clientX) != null ? _ref : event.targetTouches[0].pageX;
-      this.startY = (_ref2 = event.clientY) != null ? _ref2 : event.targetTouches[0].pageY;
+      if (event.targetTouches != null) {
+        this.startX = event.targetTouches[0].pageX;
+        this.startY = event.targetTouches[0].pageY;
+      } else {
+        this.startX = event.clientX;
+        this.startY = event.clientY;
+      }
       this.startBearing = this.bearing;
       return this.startAngle = this.angle;
     };
 
     TurntableControls.prototype.mousemove = function(event) {
-      var x, y, _ref, _ref2;
+      var x, y;
       if (this.startX && this.startY) {
-        x = (_ref = event.clientX) != null ? _ref : event.targetTouches[0].pageX;
-        y = (_ref2 = event.clientX) != null ? _ref2 : event.targetTouches[0].pageY;
+        if (event.targetTouches != null) {
+          x = event.targetTouches[0].pageX;
+          y = event.targetTouches[0].pageY;
+        } else {
+          x = event.clientX;
+          y = event.clientY;
+        }
         this.bearing = this.startBearing + (x - this.startX) * this.bearingSpeed;
         this.angle = Math.max(Math.min(this.startAngle + (y - this.startY) * this.angleSpeed, Math.PI / 2), -Math.PI / 2);
         return this.setVolatile();

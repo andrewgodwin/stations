@@ -37,15 +37,23 @@ class TurntableControls
     mousedown: (event) =>
         event.preventDefault()
         event.stopPropagation()
-        @startX = event.clientX ? event.targetTouches[0].pageX
-        @startY = event.clientY ? event.targetTouches[0].pageY
+        if event.targetTouches?
+            @startX = event.targetTouches[0].pageX
+            @startY = event.targetTouches[0].pageY
+        else
+            @startX = event.clientX
+            @startY = event.clientY
         @startBearing = @bearing
         @startAngle = @angle
 
     mousemove: (event) =>
         if @startX and @startY
-            x = event.clientX ? event.targetTouches[0].pageX
-            y = event.clientX ? event.targetTouches[0].pageY
+            if event.targetTouches?
+                x = event.targetTouches[0].pageX
+                y = event.targetTouches[0].pageY
+            else
+                x = event.clientX
+                y = event.clientY
             @bearing = @startBearing + (x - @startX) * @bearingSpeed
             @angle = Math.max(Math.min(@startAngle + (y - @startY) * @angleSpeed, Math.PI/2), -Math.PI/2)
             @setVolatile()
