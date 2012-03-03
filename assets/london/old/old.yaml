@@ -11,8 +11,8 @@ info:
     usage: 21 million
     copyright: Andrew Godwin, 2012
     description: Old Street is one of the few stations in Central London with fully tunneled National
-        Rail platforms. The platforms and tunnels that route uses were at one time part of the Underground,
-        however - first the Metropolitan Line, then as a branch of the Northern Line.
+        Rail platforms. Those platforms and tunnels used to be part of the Underground,
+        however - first the Metropolitan Line, and then as a branch of the Northern Line.
     model_notes: I'm not quite sure regarding the lengths of the corridor sections here, but the rest
         of the station layout is reasonably accurate.
 

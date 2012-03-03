@@ -36,11 +36,19 @@ body {
             color: #733;
             font-size: 80%;
         }
+        .picker p.footer {
+            clear: both;
+            color: #777;
+            font-size: 80%;
+            margin: 20px auto 10px auto;
+            text-align: center;
+        }
     .picker .stations {
         margin-left: auto;
         margin-right: auto;
         margin-top: 20px;
         width: 824px;
+        overflow: hidden;
     }
         .picker .stations li {
             float: left;

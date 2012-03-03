@@ -11,8 +11,10 @@ info:
     gated: true
     usage: 70 million
     copyright: Andrew Godwin, 2012
-    description: Oxford Circus first opened on the Central line in 1900, followed by the Bakerloo line in 1906 and the Victoria line in 1969. The building of the Victoria line resulted in a lot of work at Oxford Circus,
-        including the construction of the current ticket hall to ease congestion.
+    description: The large ticket hall at this station was only added in the late 1960s, when the Victoria
+        Line was built - before that, there were far fewer entrances. It was built by constructing
+        a supporting frame under the road and then hollowing out the soil, all while traffic continued
+        to run above.
     model_notes: The passageways between the two sets of lines here were modelled on foot, so may be slightly wrong.
 
 cameras:
