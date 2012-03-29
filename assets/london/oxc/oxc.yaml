@@ -71,7 +71,7 @@ objects:
         text: Towards Bond Street
     central.eastbound:
         title: Eastbound Central Line
-        text: Towards Tottenham Court Road
+        text: Towards Tottenham Court Roadd
     bakerloo.southbound:
         title: Southbound Bakerloo Line
         text: Towards Piccadilly Circus
@@ -86,15 +86,22 @@ objects:
         text: Towards Warren Street
     escalator.maine:
         title: Escalators
-        text: Two, up only
+        text: Two, down only
     escalator.mainw:
         title: Escalators
         text: Two, down only
     escalator.vle:
         title: Escalators
-        text: Two, no stairs
+        text: Two, bidirectional
     escalator.vlw:
         title: Escalators
-        text: Two, no stairs
-    escalator.cl:
+        text: Two, bidirectional
+    escalator.clin:
         title: Escalators
+        text: One, down only
+    escalator.clout:
+        title: Escalators
+        text: Two, up only
+    escalator.vlout:
+        title: Escalators
+        text: Three, up only
