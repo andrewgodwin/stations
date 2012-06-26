@@ -44,6 +44,16 @@ class StationViewer
         # Set up resizing correctly
         @resizeRenderer()
         window.addEventListener('resize', (=> @resizeRenderer()), false)
+        # Deal with history management
+        $(window).bind('hashchange', (=> @hashChange()))
+
+    # Deals with hash changes
+    hashChange: ->
+        fragment = $.param.fragment()
+        if (fragment == "")
+            @showPicker()
+        else
+            @pickerChoice(fragment)
 
     # Adds a compass to the world
     addCompass: ->
@@ -111,12 +121,17 @@ class StationViewer
                     line_color = @system.lines[line].color
                     line_title = @system.lines[line].title
                     li.find("p").append("<span style='background: #" + line_color + "'>" + line_title + "</span>")
-                ((code) => li.click(() => (@loadStation(code); @hidePicker())))(code)
+                ((code) => li.click(() => @pickerChoice(code)))(code)
                 picker.append(li)
             # Possibly run a callback
             if callback?
                 callback()
         )
+
+    pickerChoice: (code) ->
+        @loadStation(code)
+        @hidePicker()
+        document.location.href = "#" + code
 
     # Toggles between WebGL and Canvas modes
     toggleWebGL: ->
@@ -135,6 +150,7 @@ class StationViewer
     # Shows the "pick a station" dialog
     showPicker: ->
         jQuery(".picker").show()
+        document.location.href = "#"
 
     # Hides the picker dialog
     hidePicker: ->

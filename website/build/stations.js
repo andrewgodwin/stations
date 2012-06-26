@@ -48,9 +48,23 @@ Station viewer
       }
       this.container.append(this.renderer.domElement);
       this.resizeRenderer();
-      return window.addEventListener('resize', (function() {
+      window.addEventListener('resize', (function() {
         return _this.resizeRenderer();
       }), false);
+      return $(window).bind('hashchange', (function() {
+        return _this.hashChange();
+      }));
+    };
+
+    StationViewer.prototype.hashChange = function() {
+      var fragment;
+      fragment = $.param.fragment();
+      console.log(fragment);
+      if (fragment === "") {
+        return this.showPicker();
+      } else {
+        return this.pickerChoice(fragment);
+      }
     };
 
     StationViewer.prototype.addCompass = function() {
@@ -120,8 +134,7 @@ Station viewer
         codes.sort();
         _fn = function(code) {
           return li.click(function() {
-            _this.loadStation(code);
-            return _this.hidePicker();
+            return _this.pickerChoice(code);
           });
         };
         for (_i = 0, _len = codes.length; _i < _len; _i++) {
@@ -142,6 +155,12 @@ Station viewer
       });
     };
 
+    StationViewer.prototype.pickerChoice = function(code) {
+      this.loadStation(code);
+      this.hidePicker();
+      return document.location.href = "#" + code;
+    };
+
     StationViewer.prototype.toggleWebGL = function() {
       jQuery("canvas").remove();
       if (this.webgl) {
@@ -158,7 +177,8 @@ Station viewer
     };
 
     StationViewer.prototype.showPicker = function() {
-      return jQuery(".picker").show();
+      jQuery(".picker").show();
+      return document.location.href = "#";
     };
 
     StationViewer.prototype.hidePicker = function() {
