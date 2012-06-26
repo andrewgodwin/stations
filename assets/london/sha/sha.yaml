@@ -18,12 +18,31 @@ info:
 cameras:
     default:
         title: Overview
-        distance: 200
-        bearing: -30
-        angle: 15
+        distance: 150
+        bearing: 60
+        angle: 35
+        elevation: 0
+        vertical: 7
+        horizontal: 25
+    overground:
+        title: Overground
+        distance: 150
+        bearing: 180
+        angle: 35
+        elevation: -10
+        vertical: 50
+        horizontal: 35
+    dlr:
+        title: DLR
+        distance: 150
+        bearing: 90
+        angle: 35
+        elevation: 0
+        vertical: -20
+        horizontal: 20
 
 environment:
-    north: 90
+    north: -90
     grid: 70
 
 objects:
@@ -53,3 +72,9 @@ objects:
     overground.southbound:
         title: Southbound Overground track
         text: Towards Wapping
+    lift.overground:
+        title: Lifts to Overground
+    tickethall.overground:
+        title: Overground ticket hall
+    tickethall.dlr:
+        title: DLR street entrance
