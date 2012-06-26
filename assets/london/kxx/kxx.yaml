@@ -129,10 +129,10 @@ objects:
         text: Towards Russell Square
     circle.westbound:
         title: Westbound Circle Line
-        text: Towards Farringdon
+        text: Towards Euston Square
     circle.eastbound:
         title: Eastbound Circle Line
-        text: Towards Euston Square
+        text: Towards Farringdon
 
     escalator.down:
         title: Escalator
