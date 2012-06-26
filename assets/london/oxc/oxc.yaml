@@ -28,19 +28,19 @@ cameras:
         vertical: -20
     central:
         title: Central Line
-        distance: 160
-        bearing: 90
-        angle: 55
-        elevation: -25
-        horizontal: -15
-        vertical: -5
-    vicbak:
-        title: Victoria & Bakerloo
         distance: 200
         bearing: 0
         angle: 55
+        elevation: -25
+        horizontal: 35
+        vertical: -50
+    vicbak:
+        title: Victoria & Bakerloo
+        distance: 200
+        bearing: -90
+        angle: 55
         elevation: -20
-        horizontal: 45
+        horizontal: -35
         vertical: 20
 
 environment:
