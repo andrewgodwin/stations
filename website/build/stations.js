@@ -59,9 +59,8 @@ Station viewer
     StationViewer.prototype.hashChange = function() {
       var fragment;
       fragment = $.param.fragment();
-      console.log(fragment);
       if (fragment === "") {
-        return this.showPicker();
+        return this.showPicker(true);
       } else {
         return this.pickerChoice(fragment);
       }
@@ -176,9 +175,9 @@ Station viewer
       return this.resizeRenderer();
     };
 
-    StationViewer.prototype.showPicker = function() {
+    StationViewer.prototype.showPicker = function(suppress) {
       jQuery(".picker").show();
-      return document.location.href = "#";
+      if (suppress !== true) return document.location.href = "#";
     };
 
     StationViewer.prototype.hidePicker = function() {

@@ -51,7 +51,7 @@ class StationViewer
     hashChange: ->
         fragment = $.param.fragment()
         if (fragment == "")
-            @showPicker()
+            @showPicker(true)
         else
             @pickerChoice(fragment)
 
@@ -148,9 +148,10 @@ class StationViewer
         @resizeRenderer()
 
     # Shows the "pick a station" dialog
-    showPicker: ->
+    showPicker: (suppress) ->
         jQuery(".picker").show()
-        document.location.href = "#"
+        if suppress != true
+            document.location.href = "#"
 
     # Hides the picker dialog
     hidePicker: ->
