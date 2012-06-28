@@ -1,9 +1,9 @@
 title: Victoria
 model: ./vic.js
 lines:
-    - victoria
-    - district
     - circle
+    - district
+    - victoria
 
 info:
     zone: 1
