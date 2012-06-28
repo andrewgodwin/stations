@@ -1,0 +1,61 @@
+title: Victoria
+model: ./vic.js
+lines:
+    - victoria
+    - district
+    - circle
+
+info:
+    zone: 1
+    opened: 1868
+    gated: true
+    usage: 80 million
+    copyright: Andrew Godwin, 2012
+    description: Victoria first opened as part of the Metropolitan District Railway, with the most recent major addition being the Victoria Line in 1968. It is the second busiest station on the network, with Waterloo being the busiest.
+    model_notes: This is mostly modelled from publicity diagrams with a little bit from memory.
+
+cameras:
+    default:
+        title: Overview
+        distance: 200
+        bearing: 130
+        angle: 35
+        elevation: 0
+        vertical: 0
+        horizontal: 0
+
+environment:
+    north: 0
+    grid: 100
+
+objects:
+    platform.1:
+        title: Platform 1 (District/Circle lines)
+        text: Trains to Wimbledon, Richmond, Ealing Broadway and Edgware Road (westbound)
+    platform.2:
+        title: Platform 2 (District/Circle lines)
+        text: Trains to Tower Hill and Upminster (eastbound)
+    platform.3:
+        title: Platform 3 (Victoria Line)
+        text: Trains to Walthamstow Central (northbound)
+    platform.4:
+        title: Platform 4 (Victoria Line)
+        text: Trains to Brixton (southbound)
+    district.westbound:
+        title: Westbound District/Circle track
+        text: Towards Sloane Square
+    district.eastbound:
+        title: Eastbound District/Circle track
+        text: Towards St James' Park
+    victoria.northbound:
+        title: Northbound Victoria Line
+        text: Towards Green Park
+    victoria.southbound:
+        title: Southbound Victoria Line
+        text: Towards Pimlico
+    escalator.interchange:
+        title: Escalator
+        text: Three, bidirectional
+    escalator.victoria:
+        title: Escalator
+        text: Three, bidirectional
