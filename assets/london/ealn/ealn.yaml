@@ -1,0 +1,48 @@
+title: Emirates Royal Docks
+model: ./ealn.js
+lines:
+    - airline
+
+info:
+    zone: 3
+    opened: 2012
+    gated: true
+    copyright: Andrew Godwin, 2012
+    description: The northern of the two cable car stations on the Emirates Air Line, Emirates Royal Docks is situated on the edge of Royal Victoria Dock, very close to Royal Victoria DLR station.
+
+cameras:
+    default:
+        title: Overview
+        distance: 150
+        bearing: -135
+        angle: 25
+        elevation: 0
+        horizontal: 0
+        vertical: 0
+
+environment:
+    north: 30
+    grid: 30
+
+objects:
+    platform.1:
+        title: Platform 1
+        text: Cabins to Emirates Greenwich Peninsula
+    lift.exit:
+        title: Lift
+        text: Exit only
+    lift.entry:
+        title: Lift
+        text: Entry only
+    stairs.entry:
+        title: Stairs
+        text: Entry only
+    stairs.exit:
+        title: Stairs
+        text: Exit only
+    airline.southbound:
+        title: Southbound Emirates Airline
+        text: Towards Emirates Greenwich Peninsula
+    tickethall.ground:
+        title: Ticket Hall
+        text: Barriers and ticket booths

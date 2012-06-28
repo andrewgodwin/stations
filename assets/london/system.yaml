@@ -42,6 +42,9 @@ lines:
     nr:
         title: National Rail
         color: 4b128c
+    airline:
+        title: Emirates Air Line
+        color: d9002a
 
 materials:
     platform:
@@ -56,6 +59,8 @@ materials:
         color: 887799
     escalator:
         color: 887799
+    maintenance:
+        color: 778899
 
     bakerloo:
         color: ae6119
@@ -85,6 +90,8 @@ materials:
         color: 87d5b3
     nr:
         color: 4b128c
+    airline:
+        color: d9002a
 
 infos:
     zone: Fare Zone
